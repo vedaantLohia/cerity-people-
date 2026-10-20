@@ -5,6 +5,8 @@ import {
   ASSESSMENT0_MCQS,
   ASSESSMENT0_OPTION_INSIGHTS,
   ASSESSMENT0_WEB,
+  ASSESSMENT0_WEB_HOPS,
+  ASSESSMENT0_WEB_MAX_SHIFT,
   ASSESSMENT0_TEXT,
   type Assessment0Category,
   type Assessment0Mcq,
@@ -36,8 +38,23 @@ export type Assessment0Result = {
   overallBand: MaturityBand;
   categories: Assessment0CategoryScore[];
   gaps: Assessment0Gap[];
+  /** The single strongest knock-on across the whole web, or null if none stands out. */
+  webInsight: string | null;
   quotedText: { questionId: string; category: Assessment0Category; prompt: string; answer: string }[];
 };
+
+function strongestKnockOn(raw: Map<Assessment0Category, number>): string | null {
+  const top = ASSESSMENT0_WEB.map((e) => {
+    const from = raw.get(e.from) ?? 0;
+    const to = raw.get(e.to) ?? 0;
+    return { e, from, to, gap: e.weight * (to - from) };
+  })
+    .filter((d) => d.gap > 1)
+    .sort((a, b) => b.gap - a.gap)[0];
+  return top
+    ? `Biggest knock-on: ${top.e.from} (${top.from}%) is holding back ${top.e.to} (${top.to}%). ${top.e.ripple}`
+    : null;
+}
 
 /** The strongest weaker neighbour dragging this area down, as a sentence. */
 function knockOn(c: Assessment0CategoryScore, raw: Map<Assessment0Category, number>): string[] {
@@ -80,16 +97,32 @@ export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result 
     };
   });
 
-  // Spider web: each area moves toward the areas that feed it, so changing one
-  // answer shifts several scores by different amounts instead of one by a step.
+  // Spider web: each area moves toward the areas that feed it, repeated for
+  // ASSESSMENT0_WEB_HOPS rounds so effects travel past direct neighbours. Each
+  // round is a weighted average (weights into an area sum to 0.5 or less), so
+  // scores stay in 0-100 and improving any answer never lowers any score.
   const raw = new Map(base.map((c) => [c.category, c.rawPercent]));
+  let current = new Map(raw);
+  for (let hop = 0; hop < ASSESSMENT0_WEB_HOPS; hop++) {
+    const next = new Map<Assessment0Category, number>();
+    for (const cat of ASSESSMENT0_CATEGORIES) {
+      const inbound = ASSESSMENT0_WEB.filter((e) => e.to === cat);
+      const keep = 1 - inbound.reduce((sum, e) => sum + e.weight, 0);
+      next.set(
+        cat,
+        keep * (current.get(cat) ?? 0) +
+          inbound.reduce((sum, e) => sum + e.weight * (current.get(e.from) ?? 0), 0),
+      );
+    }
+    current = next;
+  }
   const categories = base.map((c) => {
-    const own = c.rawPercent;
-    const pull = ASSESSMENT0_WEB.filter((e) => e.to === c.category).reduce(
-      (sum, e) => sum + e.weight * ((raw.get(e.from) ?? own) - own),
-      0,
+    // Capped around the visitor's own answer; still monotone in every input.
+    const spread = Math.min(
+      c.rawPercent + ASSESSMENT0_WEB_MAX_SHIFT,
+      Math.max(c.rawPercent - ASSESSMENT0_WEB_MAX_SHIFT, current.get(c.category) ?? c.rawPercent),
     );
-    const percent = round1(Math.min(100, Math.max(0, own + pull)));
+    const percent = round1(Math.min(100, Math.max(0, spread)));
     return { ...c, percent, band: bandForScore(percent) };
   });
 
@@ -134,6 +167,7 @@ export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result 
     : [];
 
   return {
+    webInsight: strongestKnockOn(raw),
     overall,
     overallBand: bandForScore(overall),
     categories,

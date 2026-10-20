@@ -114,7 +114,17 @@ export const ASSESSMENT0_CATEGORY_PRIORITY: Record<Assessment0Category, number> 
  * The "web": how one area drags on or lifts another. Each edge says the `from`
  * area influences the `to` area with `weight`. Weights into any one area sum to
  * 0.5 or less, so scores stay between 0 and 100 and all-0 / all-100 stay fixed.
+ * The pull is applied ASSESSMENT0_WEB_HOPS times, so effects travel past direct
+ * neighbours. More hops = wider, flatter ripples; 1 = direct neighbours only.
  */
+export const ASSESSMENT0_WEB_HOPS = 2;
+
+/**
+ * The most the web may move an area away from its own answer, in points. Keeps
+ * a score honest to what the visitor said while still letting neighbours nudge it.
+ */
+export const ASSESSMENT0_WEB_MAX_SHIFT = 25;
+
 export type Assessment0Edge = {
   from: Assessment0Category;
   to: Assessment0Category;
@@ -135,6 +145,13 @@ export const ASSESSMENT0_WEB: Assessment0Edge[] = [
   { from: "HR Data & Reporting", to: "Performance Management", weight: 0.1, ripple: "Without reliable data, goals and reviews lack evidence to coach against." },
   { from: "HR Data & Reporting", to: "Recruitment & Hiring", weight: 0.1, ripple: "Without workforce data, hiring plans rest on guesses." },
   { from: "HR Data & Reporting", to: "Engagement & Retention", weight: 0.1, ripple: "Without data, attrition patterns are hard to spot early." },
+  { from: "Recruitment & Hiring", to: "HR Data & Reporting", weight: 0.1, ripple: "Candidate details kept outside the system never reach the employee record." },
+  { from: "Engagement & Retention", to: "Recruitment & Hiring", weight: 0.1, ripple: "Unseen attrition keeps hiring in constant catch-up mode." },
+  { from: "Performance Management", to: "Onboarding", weight: 0.1, ripple: "Without clear role goals, new joiners start without a clear picture of success." },
+  { from: "Onboarding", to: "Performance Management", weight: 0.1, ripple: "An uneven start makes early goals and feedback harder to set." },
+  { from: "HR Data & Reporting", to: "Attendance & Leave", weight: 0.1, ripple: "Without a central record, attendance rules are applied inconsistently." },
+  { from: "Payroll & Compliance", to: "Attendance & Leave", weight: 0.1, ripple: "Pay-cycle pressure shows up as last-minute attendance corrections." },
+  { from: "Engagement & Retention", to: "Attendance & Leave", weight: 0.1, ripple: "Disengagement tends to show first as absence and irregular attendance." },
 ];
 
 /**

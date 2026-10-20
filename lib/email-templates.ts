@@ -344,6 +344,7 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
     <ul style="margin:0 0 16px;padding-left:18px">${gapsHtml}</ul>`
         : `<p style="margin:0 0 16px">No major gaps showed up in this quick check. The full assessment can show where to go deeper.</p>`
     }
+    ${result.webInsight ? `<p style="margin:0 0 16px">${escapeHtml(result.webInsight)}</p>` : ""}
     <p style="margin:0 0 16px">This is a short snapshot, not the full briefing. If you would like a detailed report or a conversation, you can take the full assessment or book a consultation — there is no obligation.</p>
     <p style="margin:0 0 12px">
       <a href="${bookUrl}" style="display:inline-block;background:#1677E8;color:#FFFFFF;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:700">Book a consultation</a>
@@ -369,6 +370,7 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
         ]
       : ["No major gaps showed up in this quick check. The full assessment can show where to go deeper."]),
     "",
+    ...(result.webInsight ? [result.webInsight, ""] : []),
     "This is a short snapshot, not the full briefing. If you would like a detailed report or a conversation, you can take the full assessment or book a consultation — there is no obligation.",
     `Book a consultation: ${bookUrl}`,
     `Take the full assessment: ${fullUrl}`,
