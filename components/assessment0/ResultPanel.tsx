@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { BAND_COLORS, moduleCopy } from "@/lib/assessment-data";
 import type { Assessment0Details } from "@/lib/assessment0-data";
-import type { Assessment0Result } from "@/lib/assessment0-scoring";
+import { gapText, type Assessment0Result } from "@/lib/assessment0-scoring";
 import type { MaturityBand } from "@/lib/assessment-data";
 
 type Props = {
@@ -113,7 +113,7 @@ export function ResultPanel({ details, result, userEmailSent, onRetake }: Props)
               <p className="text-sm font-semibold text-navy">
                 {g.category} · {g.percent} · {g.band}
               </p>
-              <p className="mt-1 text-sm text-slate-600">{g.insights[0]}</p>
+              <p className="mt-1 text-sm text-slate-600">{gapText(g)}</p>
               {mod.title ? (
                 <p className="mt-2 text-sm text-navy">
                   Addressed by <strong>{mod.title}</strong>

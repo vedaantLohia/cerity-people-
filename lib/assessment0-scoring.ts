@@ -4,6 +4,7 @@ import {
   ASSESSMENT0_CATEGORY_PRIORITY,
   ASSESSMENT0_MCQS,
   ASSESSMENT0_OPTION_INSIGHTS,
+  ASSESSMENT0_WEB,
   ASSESSMENT0_TEXT,
   type Assessment0Category,
   type Assessment0Mcq,
@@ -13,7 +14,10 @@ import type { MaturityBand } from "./assessment-data";
 
 export type Assessment0CategoryScore = {
   category: Assessment0Category;
+  /** Score after the web: own answer plus pull from connected areas. */
   percent: number;
+  /** Score from this area's own answer alone. */
+  rawPercent: number;
   band: MaturityBand;
   mcqCount: number;
   rawSum: number;
@@ -35,14 +39,30 @@ export type Assessment0Result = {
   quotedText: { questionId: string; category: Assessment0Category; prompt: string; answer: string }[];
 };
 
+/** The strongest weaker neighbour dragging this area down, as a sentence. */
+function knockOn(c: Assessment0CategoryScore, raw: Map<Assessment0Category, number>): string[] {
+  const drag = ASSESSMENT0_WEB.filter((e) => e.to === c.category)
+    .map((e) => ({ e, gap: e.weight * (c.rawPercent - (raw.get(e.from) ?? c.rawPercent)) }))
+    .filter((d) => d.gap > 0.5)
+    .sort((a, b) => b.gap - a.gap)[0];
+  return drag ? [drag.e.ripple] : [];
+}
+
 function insightFor(q: Assessment0Mcq, answers: AssessmentAnswers): string {
   const score = q.options.find((o) => o.label === answers[q.id])?.score ?? 0;
   const perOption = ASSESSMENT0_OPTION_INSIGHTS[q.id];
-  return (score < 3 && perOption?.[score]) || q.gapInsight;
+  return (score < 3 && perOption?.[score as 0 | 1 | 2]) || q.gapInsight;
 }
 
+/** One sentence of copy per gap: the answer-specific line plus any knock-on effect. */
+export function gapText(g: Assessment0Gap): string {
+  return g.insights.join(" ");
+}
+
+const round1 = (n: number) => Math.round(n * 10) / 10;
+
 export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result {
-  const categories: Assessment0CategoryScore[] = ASSESSMENT0_CATEGORIES.map((category) => {
+  const base: Assessment0CategoryScore[] = ASSESSMENT0_CATEGORIES.map((category) => {
     const catMcqs = ASSESSMENT0_MCQS.filter((q) => q.category === category);
     const rawSum = catMcqs.reduce((sum, q) => {
       const chosen = q.options.find((o) => o.label === answers[q.id]);
@@ -53,10 +73,24 @@ export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result 
     return {
       category,
       percent,
+      rawPercent: percent,
       band: bandForScore(percent),
       mcqCount: catMcqs.length,
       rawSum,
     };
+  });
+
+  // Spider web: each area moves toward the areas that feed it, so changing one
+  // answer shifts several scores by different amounts instead of one by a step.
+  const raw = new Map(base.map((c) => [c.category, c.rawPercent]));
+  const categories = base.map((c) => {
+    const own = c.rawPercent;
+    const pull = ASSESSMENT0_WEB.filter((e) => e.to === c.category).reduce(
+      (sum, e) => sum + e.weight * ((raw.get(e.from) ?? own) - own),
+      0,
+    );
+    const percent = round1(Math.min(100, Math.max(0, own + pull)));
+    return { ...c, percent, band: bandForScore(percent) };
   });
 
   const weight = 1 / categories.length;
@@ -66,7 +100,7 @@ export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result 
   // Lowest score first; ties go to the higher-risk category. Fully optimised
   // categories are not gaps, so a strong result can show fewer than three.
   const ranked = categories
-    .filter((c) => c.percent < 100)
+    .filter((c) => c.percent < 99.95)
     .sort(
       (a, b) =>
         a.percent - b.percent ||
@@ -78,7 +112,10 @@ export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result 
       category: c.category,
       percent: c.percent,
       band: c.band,
-      insights: [...new Set(catMcqs.map((q) => insightFor(q, answers)))],
+      insights: [
+        ...new Set(catMcqs.map((q) => insightFor(q, answers))),
+        ...knockOn(c, raw),
+      ],
       solvedBy: [...new Set(catMcqs.map((q) => q.solvedBy))],
     };
   });

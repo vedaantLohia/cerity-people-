@@ -1,6 +1,6 @@
 import type { AssessmentDetails } from "./assessment-data";
 import type { Assessment0Details } from "./assessment0-data";
-import type { Assessment0Result } from "./assessment0-scoring";
+import { gapText, type Assessment0Result } from "./assessment0-scoring";
 import type { AssessmentResult } from "./assessment-scoring";
 import { siteOrigin } from "./email";
 import { siteConfig } from "./site-config";
@@ -286,7 +286,7 @@ export function assessment0SalesEmail(
     .join("");
   const gaps = result.gaps
     .slice(0, 3)
-    .map((g, i) => row(`${i + 1}. ${g.category}`, `${g.percent}% · ${g.band} · ${g.insights[0] ?? ""}`))
+    .map((g, i) => row(`${i + 1}. ${g.category}`, `${g.percent}% · ${g.band} · ${gapText(g)}`))
     .join("");
   const html = wrap({
     preheader: `Quick check ${details.email}: ${result.overall} ${result.overallBand}`,
@@ -319,7 +319,7 @@ export function assessment0SalesEmail(
     ...result.categories.map((c) => `- ${c.category}: ${c.percent} ${c.band}`),
     "",
     "Top 3 priority gaps:",
-    ...result.gaps.slice(0, 3).map((g, i) => `${i + 1}. ${g.category} ${g.percent}% ${g.band} — ${g.insights[0] ?? ""}`),
+    ...result.gaps.slice(0, 3).map((g, i) => `${i + 1}. ${g.category} ${g.percent}% ${g.band} — ${gapText(g)}`),
   ].join("\n");
   return { subject, html, text };
 }
@@ -332,7 +332,7 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
     .slice(0, 3)
     .map(
       (g) =>
-        `<li style="margin:0 0 8px">${escapeHtml(g.category)} — ${g.percent}% (${escapeHtml(g.band)}): ${escapeHtml(g.insights[0] ?? "")}</li>`,
+        `<li style="margin:0 0 8px">${escapeHtml(g.category)} — ${g.percent}% (${escapeHtml(g.band)}): ${escapeHtml(gapText(g))}</li>`,
     )
     .join("");
   const body = `
@@ -365,7 +365,7 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
     ...(result.gaps.length
       ? [
           "Areas to look at first:",
-          ...result.gaps.slice(0, 3).map((g) => `- ${g.category} — ${g.percent}% (${g.band}): ${g.insights[0] ?? ""}`),
+          ...result.gaps.slice(0, 3).map((g) => `- ${g.category} — ${g.percent}% (${g.band}): ${gapText(g)}`),
         ]
       : ["No major gaps showed up in this quick check. The full assessment can show where to go deeper."]),
     "",

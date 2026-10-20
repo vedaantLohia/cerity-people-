@@ -111,6 +111,33 @@ export const ASSESSMENT0_CATEGORY_PRIORITY: Record<Assessment0Category, number> 
 };
 
 /**
+ * The "web": how one area drags on or lifts another. Each edge says the `from`
+ * area influences the `to` area with `weight`. Weights into any one area sum to
+ * 0.5 or less, so scores stay between 0 and 100 and all-0 / all-100 stay fixed.
+ */
+export type Assessment0Edge = {
+  from: Assessment0Category;
+  to: Assessment0Category;
+  weight: number;
+  ripple: string;
+};
+
+export const ASSESSMENT0_WEB: Assessment0Edge[] = [
+  { from: "Attendance & Leave", to: "Payroll & Compliance", weight: 0.3, ripple: "Unreliable attendance feeds straight into pay runs, which compounds this." },
+  { from: "HR Data & Reporting", to: "Payroll & Compliance", weight: 0.15, ripple: "Weak people data means payroll inputs are rebuilt by hand each cycle." },
+  { from: "Recruitment & Hiring", to: "Onboarding", weight: 0.25, ripple: "A loose hiring pipeline hands onboarding incomplete candidate records." },
+  { from: "Onboarding", to: "Engagement & Retention", weight: 0.15, ripple: "A rough first week sets the tone for early attrition." },
+  { from: "Onboarding", to: "HR Data & Reporting", weight: 0.1, ripple: "Paperwork captured late leaves gaps in the employee record." },
+  { from: "Attendance & Leave", to: "HR Data & Reporting", weight: 0.1, ripple: "Attendance that is not captured cleanly leaves holes in workforce reports." },
+  { from: "Payroll & Compliance", to: "HR Data & Reporting", weight: 0.1, ripple: "Payroll kept outside the HR record splits the source of truth." },
+  { from: "Performance Management", to: "Engagement & Retention", weight: 0.25, ripple: "Without clear goals and feedback, engagement is harder to hold." },
+  { from: "Engagement & Retention", to: "Performance Management", weight: 0.15, ripple: "Low engagement signals make reviews less honest and less useful." },
+  { from: "HR Data & Reporting", to: "Performance Management", weight: 0.1, ripple: "Without reliable data, goals and reviews lack evidence to coach against." },
+  { from: "HR Data & Reporting", to: "Recruitment & Hiring", weight: 0.1, ripple: "Without workforce data, hiring plans rest on guesses." },
+  { from: "HR Data & Reporting", to: "Engagement & Retention", weight: 0.1, ripple: "Without data, attrition patterns are hard to spot early." },
+];
+
+/**
  * Gap copy per answer, indexed by option score 0-2. A score of 3 is never a gap.
  * Falls back to the question's static gapInsight if an id is missing here.
  */
