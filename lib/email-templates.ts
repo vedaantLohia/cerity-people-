@@ -338,8 +338,12 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
   const body = `
     <p style="margin:0 0 12px">Hello,</p>
     <p style="margin:0 0 12px">Thank you for completing the quick HR check. Your indicative score is <strong>${result.overall}/100</strong> (${escapeHtml(result.overallBand)}).</p>
-    <p style="margin:0 0 8px"><strong>Areas to look at first</strong></p>
-    <ul style="margin:0 0 16px;padding-left:18px">${gapsHtml}</ul>
+    ${
+      result.gaps.length
+        ? `<p style="margin:0 0 8px"><strong>Areas to look at first</strong></p>
+    <ul style="margin:0 0 16px;padding-left:18px">${gapsHtml}</ul>`
+        : `<p style="margin:0 0 16px">No major gaps showed up in this quick check. The full assessment can show where to go deeper.</p>`
+    }
     <p style="margin:0 0 16px">This is a short snapshot, not the full briefing. If you would like a detailed report or a conversation, you can take the full assessment or book a consultation — there is no obligation.</p>
     <p style="margin:0 0 12px">
       <a href="${bookUrl}" style="display:inline-block;background:#1677E8;color:#FFFFFF;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:700">Book a consultation</a>
@@ -358,8 +362,12 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
     "",
     `Thank you for completing the quick HR check. Your indicative score is ${result.overall}/100 (${result.overallBand}).`,
     "",
-    "Areas to look at first:",
-    ...result.gaps.slice(0, 3).map((g) => `- ${g.category} — ${g.percent}% (${g.band}): ${g.insights[0] ?? ""}`),
+    ...(result.gaps.length
+      ? [
+          "Areas to look at first:",
+          ...result.gaps.slice(0, 3).map((g) => `- ${g.category} — ${g.percent}% (${g.band}): ${g.insights[0] ?? ""}`),
+        ]
+      : ["No major gaps showed up in this quick check. The full assessment can show where to go deeper."]),
     "",
     "This is a short snapshot, not the full briefing. If you would like a detailed report or a conversation, you can take the full assessment or book a consultation — there is no obligation.",
     `Book a consultation: ${bookUrl}`,

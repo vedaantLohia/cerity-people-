@@ -96,6 +96,62 @@ export const ASSESSMENT0_MCQS = ASSESSMENT0_QUESTIONS.filter(
   (q): q is Assessment0Mcq => q.type === "mcq",
 );
 
+/**
+ * Tie-break when categories share a score: higher number = shown first.
+ * Compliance and attendance carry the most risk, so they win ties.
+ */
+export const ASSESSMENT0_CATEGORY_PRIORITY: Record<Assessment0Category, number> = {
+  "Payroll & Compliance": 7,
+  "Attendance & Leave": 6,
+  "Recruitment & Hiring": 5,
+  Onboarding: 4,
+  "Performance Management": 3,
+  "Engagement & Retention": 2,
+  "HR Data & Reporting": 1,
+};
+
+/**
+ * Gap copy per answer, indexed by option score 0-2. A score of 3 is never a gap.
+ * Falls back to the question's static gapInsight if an id is missing here.
+ */
+export const ASSESSMENT0_OPTION_INSIGHTS: Record<string, [string, string, string]> = {
+  "rec-q1": [
+    "Hiring lives outside any system of record, so pipelines stall and offers are hard to audit.",
+    "Spreadsheets give a shared view but no stages, SLAs, or audit trail, so hiring speed is hard to measure.",
+    "You have an ATS, but without integrated stages, SLAs, and reporting, hiring bottlenecks stay hidden.",
+  ],
+  "onb-q1": [
+    "Onboarding is paper-based and reactive, so day-one readiness depends on who remembers to chase.",
+    "Email checklists and shared folders leave tasks and documents easy to miss or lose.",
+    "A basic onboarding tool is in place, but tasks and documents are not yet automated into one day-one flow.",
+  ],
+  "att-q1": [
+    "Attendance has no reliable record, so payroll, leave, and compliance all rest on guesswork.",
+    "Manager-updated spreadsheets are error-prone and hard to reconcile with leave and payroll.",
+    "Attendance is captured, but without policy-based regularisation, exceptions are still fixed by hand each cycle.",
+  ],
+  "pay-q1": [
+    "Payroll and filings are manual and reactive, which raises the risk of errors and missed deadlines.",
+    "Spreadsheets and calendar reminders leave payroll accuracy and filing evidence dependent on people, not process.",
+    "Payroll is on software, but filings that sit with a consultant or separate tool make records slow to assemble for review.",
+  ],
+  "perf-q0": [
+    "With no consistent record, goals and reviews cannot be coached against or defended later.",
+    "Annual reviews in documents capture one moment a year, so feedback arrives late and goals drift.",
+    "A review tool exists, but loosely tracked goals mean development and reviews are not yet connected.",
+  ],
+  "eng-q0": [
+    "Retention risk stays invisible until people resign, so action almost always comes too late.",
+    "Occasional surveys and manager notes give signals, but not early or consistent enough to act on.",
+    "Pulse surveys run, but limited follow-up means people may not see action on what they raise.",
+  ],
+  "dat-q2": [
+    "Scattered files mean there is no reliable source of truth, and leadership reports wait on manual extracts.",
+    "Master spreadsheets and monthly slides go stale quickly and depend on whoever maintains them.",
+    "An HR tool holds some fields, but reports that are not self-serve still depend on manual extracts.",
+  ],
+};
+
 export const ASSESSMENT0_TEXT = ASSESSMENT0_QUESTIONS.find(
   (q): q is Assessment0Text => q.type === "text",
 )!;

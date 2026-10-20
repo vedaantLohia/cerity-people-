@@ -1,9 +1,12 @@
 import { BAND_COLORS } from "./assessment-data";
 import {
   ASSESSMENT0_CATEGORIES,
+  ASSESSMENT0_CATEGORY_PRIORITY,
   ASSESSMENT0_MCQS,
+  ASSESSMENT0_OPTION_INSIGHTS,
   ASSESSMENT0_TEXT,
   type Assessment0Category,
+  type Assessment0Mcq,
 } from "./assessment0-data";
 import { bandForScore, type AssessmentAnswers } from "./assessment-scoring";
 import type { MaturityBand } from "./assessment-data";
@@ -32,6 +35,12 @@ export type Assessment0Result = {
   quotedText: { questionId: string; category: Assessment0Category; prompt: string; answer: string }[];
 };
 
+function insightFor(q: Assessment0Mcq, answers: AssessmentAnswers): string {
+  const score = q.options.find((o) => o.label === answers[q.id])?.score ?? 0;
+  const perOption = ASSESSMENT0_OPTION_INSIGHTS[q.id];
+  return (score < 3 && perOption?.[score]) || q.gapInsight;
+}
+
 export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result {
   const categories: Assessment0CategoryScore[] = ASSESSMENT0_CATEGORIES.map((category) => {
     const catMcqs = ASSESSMENT0_MCQS.filter((q) => q.category === category);
@@ -54,14 +63,22 @@ export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result 
   const overall =
     Math.round(categories.reduce((acc, c) => acc + c.percent * weight, 0) * 10) / 10;
 
-  const ranked = [...categories].sort((a, b) => a.percent - b.percent);
+  // Lowest score first; ties go to the higher-risk category. Fully optimised
+  // categories are not gaps, so a strong result can show fewer than three.
+  const ranked = categories
+    .filter((c) => c.percent < 100)
+    .sort(
+      (a, b) =>
+        a.percent - b.percent ||
+        ASSESSMENT0_CATEGORY_PRIORITY[b.category] - ASSESSMENT0_CATEGORY_PRIORITY[a.category],
+    );
   const gaps: Assessment0Gap[] = ranked.slice(0, 3).map((c) => {
     const catMcqs = ASSESSMENT0_MCQS.filter((q) => q.category === c.category);
     return {
       category: c.category,
       percent: c.percent,
       band: c.band,
-      insights: [...new Set(catMcqs.map((q) => q.gapInsight))],
+      insights: [...new Set(catMcqs.map((q) => insightFor(q, answers)))],
       solvedBy: [...new Set(catMcqs.map((q) => q.solvedBy))],
     };
   });

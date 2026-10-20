@@ -100,6 +100,11 @@ export function ResultPanel({ details, result, userEmailSent, onRetake }: Props)
       </div>
 
       <h3 className="mt-8 font-serif text-2xl text-navy">Top gaps</h3>
+      {result.gaps.length === 0 ? (
+        <p className="mt-3 rounded-xl border border-white/70 bg-white/70 p-4 text-sm text-slate-600">
+          No major gaps showed up in this quick check. The full assessment can show where to go deeper.
+        </p>
+      ) : null}
       <ul className="mt-3 space-y-3">
         {result.gaps.map((g) => {
           const mod = moduleCopy(g.solvedBy[0] ?? "");
