@@ -100,7 +100,8 @@ export function scoreAssessment0(answers: AssessmentAnswers): Assessment0Result 
   // Lowest score first; ties go to the higher-risk category. Fully optimised
   // categories are not gaps, so a strong result can show fewer than three.
   const ranked = categories
-    .filter((c) => c.percent < 99.95)
+    // The best answer is never a gap, even if connected areas drag its score down.
+    .filter((c) => c.rawPercent < 100 && c.percent < 99.95)
     .sort(
       (a, b) =>
         a.percent - b.percent ||
