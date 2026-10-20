@@ -45,8 +45,6 @@ export async function POST(request: Request) {
 
   const { details, answers, consent } = parsed.data;
   const result = scoreAssessment0(answers);
-  // Personalised readout from Claude; null means "use the fixed copy".
-  const narrative = await generateAssessment0Narrative(result, answers);
   const ipHash = hashIp(clientIp(request));
   const consentAt = new Date();
 
@@ -107,6 +105,10 @@ export async function POST(request: Request) {
       data: { salesEmailStatus: EmailStatus.FAILED, salesEmailError: message.slice(0, 500) },
     });
   }
+
+  // Personalised readout from Claude, after the lead is saved and sales is notified so a
+  // slow or failed call can never lose either. null means "use the fixed copy".
+  const narrative = await generateAssessment0Narrative(result, answers);
 
   try {
     if (await shouldSkipUserEmail(details.email)) {

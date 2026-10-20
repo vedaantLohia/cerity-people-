@@ -11,11 +11,16 @@ import type { Assessment0Result } from "./assessment0-scoring";
 
 export type Assessment0Narrative = {
   summary: string;
-  gaps: { category: Assessment0Category; narrative: string; nextStep: string }[];
+  gaps: {
+    category: Assessment0Category;
+    narrative: string;
+    nextStep: string;
+  }[];
 };
 
 const MODEL = process.env.ANTHROPIC_MODEL || "claude-opus-5-5";
-const TIMEOUT_MS = 15_000;
+// Hard cap on the whole call, retries included, so a slow API can never eat the route's time.
+const DEADLINE_MS = 12_000;
 
 const SYSTEM = `You write the personalised readout for a short HR health check on the Cerity People website.
 
@@ -39,7 +44,7 @@ const outputSchema = z.object({
         nextStep: z.string().min(1).max(250),
       }),
     )
-    .max(3),
+    .max(7), // extras are dropped below; only the gaps we show are kept
 });
 
 /** JSON Schema for structured outputs (hand-written to stay within the supported subset). */
@@ -71,7 +76,11 @@ export function buildNarrativePrompt(
   answers: Record<string, string>,
 ): string {
   const lines: string[] = [];
-  lines.push(`Overall: ${result.overall}/100 (${result.overallBand}).`, "", "Answers by area:");
+  lines.push(
+    `Overall: ${result.overall}/100 (${result.overallBand}).`,
+    "",
+    "Answers by area:",
+  );
   for (const q of ASSESSMENT0_MCQS) {
     const cat = result.categories.find((c) => c.category === q.category);
     lines.push(
@@ -85,14 +94,21 @@ export function buildNarrativePrompt(
     );
   }
   if (result.gaps.length === 0) {
-    lines.push("- None. Every area is at the best level; write a short congratulatory summary and no gaps.");
+    lines.push(
+      "- None. Every area is at the best level; write a short congratulatory summary and no gaps.",
+    );
   }
-  if (result.webInsight) lines.push("", `Strongest connection between areas: ${result.webInsight}`);
+  if (result.webInsight)
+    lines.push("", `Strongest connection between areas: ${result.webInsight}`);
   const links = ASSESSMENT0_WEB.map((e) => `${e.from} -> ${e.to}`).join("; ");
   lines.push("", `Areas influence each other like this: ${links}.`);
   const headache = result.quotedText[0]?.answer;
   if (headache) {
-    lines.push("", `Their biggest HR headache, in their words (${ASSESSMENT0_TEXT.id}):`, `<visitor_text>${headache}</visitor_text>`);
+    lines.push(
+      "",
+      `Their biggest HR headache, in their words (${ASSESSMENT0_TEXT.id}):`,
+      `<visitor_text>${headache}</visitor_text>`,
+    );
   }
   return lines.join("\n");
 }
@@ -100,7 +116,7 @@ export function buildNarrativePrompt(
 let client: Anthropic | null = null;
 function getClient(): Anthropic | null {
   if (!process.env.ANTHROPIC_API_KEY) return null;
-  client ??= new Anthropic({ timeout: TIMEOUT_MS, maxRetries: 1 });
+  client ??= new Anthropic({ timeout: DEADLINE_MS, maxRetries: 1 });
   return client;
 }
 
@@ -117,21 +133,35 @@ export async function generateAssessment0Narrative(
   if (!anthropic) return null;
 
   try {
-    const response = await anthropic.beta.messages.create({
-      model: MODEL,
-      max_tokens: 1500,
-      system: SYSTEM,
-      output_config: { effort: "low", format: { type: "json_schema", schema: jsonSchema } },
-      betas: ["server-side-fallback-2026-06-01"],
-      fallbacks: [{ model: "claude-opus-4-8" }],
-      messages: [{ role: "user", content: buildNarrativePrompt(result, answers) }],
-    });
+    const response = await anthropic.beta.messages.create(
+      {
+        model: MODEL,
+        max_tokens: 1500,
+        system: SYSTEM,
+        output_config: {
+          effort: "low",
+          format: { type: "json_schema", schema: jsonSchema },
+        },
+        betas: ["server-side-fallback-2026-06-01"],
+        fallbacks: [{ model: "claude-opus-4-8" }],
+        messages: [
+          { role: "user", content: buildNarrativePrompt(result, answers) },
+        ],
+      },
+      { signal: AbortSignal.timeout(DEADLINE_MS) },
+    );
 
-    if (response.stop_reason === "refusal" || response.stop_reason === "max_tokens") return null;
+    if (
+      response.stop_reason === "refusal" ||
+      response.stop_reason === "max_tokens"
+    )
+      return null;
     const block = response.content.find((b) => b.type === "text");
     if (!block || block.type !== "text") return null;
 
-    const parsed = outputSchema.safeParse(JSON.parse(block.text));
+    const parsed = outputSchema.safeParse(
+      JSON.parse(block.text.replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, "")),
+    );
     if (!parsed.success) return null;
 
     // Only keep copy for the gaps we actually show, in the order we show them.
