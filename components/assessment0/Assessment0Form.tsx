@@ -8,6 +8,7 @@ import {
   emptyAssessment0Details,
   type Assessment0Details,
 } from "@/lib/assessment0-data";
+import type { Assessment0Narrative } from "@/lib/assessment0-narrative";
 import { scoreAssessment0, type Assessment0Result } from "@/lib/assessment0-scoring";
 import { assessment0PayloadSchema, zodFieldErrors } from "@/lib/validation";
 import { DetailsSection } from "./DetailsSection";
@@ -60,6 +61,7 @@ export function Assessment0Form() {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<Assessment0Result | null>(null);
   const [userEmailSent, setUserEmailSent] = useState(false);
+  const [narrative, setNarrative] = useState<Assessment0Narrative | null>(null);
 
   const answered = useMemo(() => {
     const mcqDone = ASSESSMENT0_MCQS.filter((q) => Boolean(answers[q.id])).length;
@@ -110,9 +112,10 @@ export function Assessment0Form() {
         setErrors({ form: "We couldn’t send your details. Please try again." });
         return;
       }
-      const json = (await res.json()) as { userEmailSent?: boolean };
+      const json = (await res.json()) as { userEmailSent?: boolean; narrative?: Assessment0Narrative | null };
       const scored = scoreAssessment0(parsed.data.answers);
       setUserEmailSent(Boolean(json.userEmailSent));
+      setNarrative(json.narrative ?? null);
       setResult(scored);
       requestAnimationFrame(() => {
         document.getElementById("a0-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -131,12 +134,13 @@ export function Assessment0Form() {
     setWebsite("");
     setErrors({});
     setResult(null);
+    setNarrative(null);
     setUserEmailSent(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (result) {
-    return <ResultPanel details={details} result={result} userEmailSent={userEmailSent} onRetake={retake} />;
+    return <ResultPanel details={details} result={result} userEmailSent={userEmailSent} narrative={narrative} onRetake={retake} />;
   }
 
   return (

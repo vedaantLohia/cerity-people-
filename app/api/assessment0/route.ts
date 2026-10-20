@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { replyToForPeople, salesTeamEmail, sendEmail } from "@/lib/email";
 import { shouldSkipUserEmail } from "@/lib/email-limit";
 import { assessment0SalesEmail, assessment0UserEmail } from "@/lib/email-templates";
+import { generateAssessment0Narrative } from "@/lib/assessment0-narrative";
 import { scoreAssessment0 } from "@/lib/assessment0-scoring";
 import { clientIp, hashIp } from "@/lib/hash-ip";
 import { enforceRateLimit, jsonError, jsonOk, tooLarge } from "@/lib/http";
@@ -44,6 +45,8 @@ export async function POST(request: Request) {
 
   const { details, answers, consent } = parsed.data;
   const result = scoreAssessment0(answers);
+  // Personalised readout from Claude; null means "use the fixed copy".
+  const narrative = await generateAssessment0Narrative(result, answers);
   const ipHash = hashIp(clientIp(request));
   const consentAt = new Date();
 
@@ -112,7 +115,7 @@ export async function POST(request: Request) {
         data: { userEmailStatus: EmailStatus.SKIPPED, userEmailError: "hourly_cap" },
       });
     } else {
-      const mail = assessment0UserEmail(details, result);
+      const mail = assessment0UserEmail(details, result, narrative);
       await sendEmail({
         to: details.email,
         subject: mail.subject,
@@ -139,5 +142,5 @@ export async function POST(request: Request) {
     });
   }
 
-  return jsonOk({ userEmailSent });
+  return jsonOk({ userEmailSent, narrative });
 }

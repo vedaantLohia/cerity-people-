@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { BAND_COLORS, moduleCopy } from "@/lib/assessment-data";
 import type { Assessment0Details } from "@/lib/assessment0-data";
+import type { Assessment0Narrative } from "@/lib/assessment0-narrative";
 import { gapText, type Assessment0Result } from "@/lib/assessment0-scoring";
 import type { MaturityBand } from "@/lib/assessment-data";
 
@@ -11,6 +12,7 @@ type Props = {
   details: Assessment0Details;
   result: Assessment0Result;
   userEmailSent: boolean;
+  narrative?: Assessment0Narrative | null;
   onRetake: () => void;
 };
 
@@ -27,7 +29,7 @@ function shortLabel(name: string) {
   return map[name] ?? name;
 }
 
-export function ResultPanel({ details, result, userEmailSent, onRetake }: Props) {
+export function ResultPanel({ details, result, userEmailSent, narrative = null, onRetake }: Props) {
   const gaugeColor = BAND_COLORS[result.overallBand];
   const angle = (result.overall / 100) * 180;
   const barData = result.categories.map((c) => ({
@@ -100,7 +102,11 @@ export function ResultPanel({ details, result, userEmailSent, onRetake }: Props)
       </div>
 
       <h3 className="mt-8 font-serif text-2xl text-navy">Top gaps</h3>
-      {result.webInsight ? (
+      {narrative ? (
+        <p className="mt-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 text-sm text-navy">
+          {narrative.summary}
+        </p>
+      ) : result.webInsight ? (
         <p className="mt-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 text-sm text-navy">
           {result.webInsight}
         </p>
@@ -113,12 +119,18 @@ export function ResultPanel({ details, result, userEmailSent, onRetake }: Props)
       <ul className="mt-3 space-y-3">
         {result.gaps.map((g) => {
           const mod = moduleCopy(g.solvedBy[0] ?? "");
+          const personal = narrative?.gaps.find((n) => n.category === g.category);
           return (
             <li key={g.category} className="rounded-xl border border-white/70 bg-white/70 p-4">
               <p className="text-sm font-semibold text-navy">
                 {g.category} · {g.percent} · {g.band}
               </p>
-              <p className="mt-1 text-sm text-slate-600">{gapText(g)}</p>
+              <p className="mt-1 text-sm text-slate-600">{personal?.narrative ?? gapText(g)}</p>
+              {personal ? (
+                <p className="mt-1 text-sm text-navy">
+                  <strong>Next step:</strong> {personal.nextStep}
+                </p>
+              ) : null}
               {mod.title ? (
                 <p className="mt-2 text-sm text-navy">
                   Addressed by <strong>{mod.title}</strong>

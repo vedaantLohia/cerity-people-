@@ -1,6 +1,7 @@
 import type { AssessmentDetails } from "./assessment-data";
 import type { Assessment0Details } from "./assessment0-data";
 import { gapText, type Assessment0Result } from "./assessment0-scoring";
+import type { Assessment0Narrative } from "./assessment0-narrative";
 import type { AssessmentResult } from "./assessment-scoring";
 import { siteOrigin } from "./email";
 import { siteConfig } from "./site-config";
@@ -324,7 +325,12 @@ export function assessment0SalesEmail(
   return { subject, html, text };
 }
 
-export function assessment0UserEmail(details: Assessment0Details, result: Assessment0Result): Mail {
+export function assessment0UserEmail(
+  details: Assessment0Details,
+  result: Assessment0Result,
+  narrative: Assessment0Narrative | null = null,
+): Mail {
+  const personal = (category: string) => narrative?.gaps.find((g) => g.category === category);
   const subject = "Your quick HR check results from Cerity People";
   const bookUrl = `${siteOrigin()}/contact`;
   const fullUrl = `${siteOrigin()}/assessment`;
@@ -332,7 +338,9 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
     .slice(0, 3)
     .map(
       (g) =>
-        `<li style="margin:0 0 8px">${escapeHtml(g.category)} — ${g.percent}% (${escapeHtml(g.band)}): ${escapeHtml(gapText(g))}</li>`,
+        `<li style="margin:0 0 8px">${escapeHtml(g.category)} — ${g.percent}% (${escapeHtml(g.band)}): ${escapeHtml(personal(g.category)?.narrative ?? gapText(g))}${
+          personal(g.category) ? ` <em>Next step: ${escapeHtml(personal(g.category)!.nextStep)}</em>` : ""
+        }</li>`,
     )
     .join("");
   const body = `
@@ -344,7 +352,13 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
     <ul style="margin:0 0 16px;padding-left:18px">${gapsHtml}</ul>`
         : `<p style="margin:0 0 16px">No major gaps showed up in this quick check. The full assessment can show where to go deeper.</p>`
     }
-    ${result.webInsight ? `<p style="margin:0 0 16px">${escapeHtml(result.webInsight)}</p>` : ""}
+    ${
+      narrative
+        ? `<p style="margin:0 0 16px">${escapeHtml(narrative.summary)}</p>`
+        : result.webInsight
+          ? `<p style="margin:0 0 16px">${escapeHtml(result.webInsight)}</p>`
+          : ""
+    }
     <p style="margin:0 0 16px">This is a short snapshot, not the full briefing. If you would like a detailed report or a conversation, you can take the full assessment or book a consultation — there is no obligation.</p>
     <p style="margin:0 0 12px">
       <a href="${bookUrl}" style="display:inline-block;background:#1677E8;color:#FFFFFF;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:700">Book a consultation</a>
@@ -366,11 +380,18 @@ export function assessment0UserEmail(details: Assessment0Details, result: Assess
     ...(result.gaps.length
       ? [
           "Areas to look at first:",
-          ...result.gaps.slice(0, 3).map((g) => `- ${g.category} — ${g.percent}% (${g.band}): ${gapText(g)}`),
+          ...result.gaps
+            .slice(0, 3)
+            .map(
+              (g) =>
+                `- ${g.category} — ${g.percent}% (${g.band}): ${personal(g.category)?.narrative ?? gapText(g)}${
+                  personal(g.category) ? ` Next step: ${personal(g.category)!.nextStep}` : ""
+                }`,
+            ),
         ]
       : ["No major gaps showed up in this quick check. The full assessment can show where to go deeper."]),
     "",
-    ...(result.webInsight ? [result.webInsight, ""] : []),
+    ...(narrative ? [narrative.summary, ""] : result.webInsight ? [result.webInsight, ""] : []),
     "This is a short snapshot, not the full briefing. If you would like a detailed report or a conversation, you can take the full assessment or book a consultation — there is no obligation.",
     `Book a consultation: ${bookUrl}`,
     `Take the full assessment: ${fullUrl}`,
