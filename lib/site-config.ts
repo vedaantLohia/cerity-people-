@@ -9,6 +9,11 @@ export const siteConfig = {
     "Modern HRMS, payroll, and HR consulting for growing businesses. Simplify HR operations, improve compliance, and scale your workforce.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.ceritypeople.com",
   locale: "en_US",
+  footer: {
+    tagline: "Digitally Enabled. Expertly Managed.",
+    description:
+      "Practical HR support and technology-driven solutions to help businesses manage people, streamline HR processes, and support growth.",
+  },
   contact: {
     email: "hello@ceritypeople.com",
     phone: "+91 80 1234 5678",

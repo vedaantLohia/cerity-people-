@@ -3,27 +3,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
-  Award,
+  Banknote,
   BarChart3,
-  Building2,
+  CalendarCheck,
   ChevronLeft,
   ChevronRight,
   ClipboardCheck,
-  Database,
-  DoorOpen,
   FileText,
+  FolderOpen,
   Gift,
-  GraduationCap,
-  Heart,
+  Handshake,
   IdCard,
-  LayoutTemplate,
-  LogOut,
-  Megaphone,
-  MessageCircle,
-  Package,
-  Search,
-  Sparkles,
-  Star,
+  Landmark,
+  MessageSquareHeart,
+  Receipt,
+  Scale,
+  ShieldCheck,
   Target,
   TrendingUp,
   UserPlus,
@@ -37,6 +32,7 @@ type Stage = {
   id: string;
   name: string;
   title: string;
+  subtitle?: string;
   body: string;
   cta: string;
   href: string;
@@ -47,129 +43,87 @@ type Stage = {
 
 const STAGES: Stage[] = [
   {
-    id: "attract",
-    name: "Attract",
-    title: "Build awareness and connect with the right talent.",
-    body: "Strengthen your employer brand, reach the right audience, and create a compelling candidate experience to attract top talent.",
-    cta: "Explore Attract Solutions",
-    href: "/hr-tech",
-    icon: Megaphone,
-    tone: "blue",
-    capabilities: [
-      { label: "Employer Branding", icon: Megaphone },
-      { label: "Talent Sourcing", icon: Users },
-      { label: "Career Page Management", icon: LayoutTemplate },
-      { label: "Talent Pipeline", icon: Database },
-      { label: "AI-Powered Job Matching", icon: Sparkles },
-      { label: "Candidate Engagement", icon: MessageCircle },
-    ],
-  },
-  {
-    id: "recruit",
-    name: "Recruit & Hire",
-    title: "Find, assess, and hire the people who fit.",
-    body: "Run a connected hiring process from requisition to offer — scheduling, assessments, and decisions in one place.",
-    cta: "Explore Recruit Solutions",
-    href: "/hr-tech",
+    id: "recruitment",
+    name: "Recruitment",
+    title: "Find the Right Fit, Faster",
+    subtitle: "Recruitment & Talent Acquisition",
+    body: "Connect with the right talent through a more organized hiring process, from defining the role to evaluating candidates and preparing offers. Less time on coordination. More focus on the right hire.",
+    cta: "Explore Recruitment Solutions",
+    href: "/solutions",
     icon: Users,
     tone: "blue",
     capabilities: [
-      { label: "Job Requisitions", icon: FileText },
-      { label: "Interview Scheduling", icon: UserPlus },
+      { label: "Job Description Development", icon: FileText },
+      { label: "Interview Coordination", icon: UserPlus },
       { label: "Candidate Assessment", icon: ClipboardCheck },
-      { label: "Offer Letters", icon: FileText },
-      { label: "Background Verification", icon: Search },
-      { label: "ATS Pipeline", icon: Database },
+      { label: "Offer Management", icon: Handshake },
     ],
   },
   {
-    id: "onboard",
-    name: "Onboard",
-    title: "Welcome new hires with a seamless first day.",
-    body: "Automate joining formalities, documents, and day-one tasks so people feel ready from the moment they start.",
-    cta: "Explore Onboard Solutions",
-    href: "/hr-tech",
+    id: "onboarding",
+    name: "Onboarding",
+    title: "Start Strong, Stay Organized",
+    subtitle: "Onboarding & HR Administration",
+    body: "Create a smoother start for every new hire while keeping essential HR tasks, records, and day-to-day processes organized.",
+    cta: "Explore Onboarding Solutions",
+    href: "/solutions",
     icon: IdCard,
     tone: "blue",
     capabilities: [
-      { label: "Digital Onboarding", icon: ClipboardCheck },
-      { label: "Document Collection", icon: FileText },
-      { label: "Joining Formalities", icon: IdCard },
-      { label: "Asset Assignment", icon: Package },
-      { label: "Policy Acknowledgements", icon: Building2 },
-      { label: "Day-One Readiness", icon: Star },
+      { label: "Onboarding and Joining Formalities", icon: IdCard },
+      { label: "Attendance, Leave and Holiday Management", icon: CalendarCheck },
+      { label: "HR Documentation and Records", icon: FolderOpen },
+      { label: "Group Insurance Enrolment", icon: ShieldCheck },
     ],
   },
   {
-    id: "engage",
-    name: "Engage",
-    title: "Keep people connected, heard, and motivated.",
-    body: "Give HR and managers the tools to listen, recognize, and communicate — so engagement stays visible, not assumed.",
-    cta: "Explore Engage Solutions",
-    href: "/hr-tech",
-    icon: Heart,
+    id: "payroll",
+    name: "Payroll & Compensation",
+    title: "Every Pay Cycle, in Order",
+    body: "Bring accuracy and clarity to payroll, compensation and employee payouts, from monthly salaries to final settlements. Every pay run is checked, timely and fully controlled.",
+    cta: "Explore Payroll Solutions",
+    href: "/solutions",
+    icon: Wallet,
+    tone: "blue",
+    capabilities: [
+      { label: "Payroll Processing", icon: Banknote },
+      { label: "Compensation and Variable Pay", icon: Gift },
+      { label: "Expense Reimbursements", icon: Receipt },
+      { label: "Full & Final Settlement and Gratuity", icon: Wallet },
+    ],
+  },
+  {
+    id: "compliance",
+    name: "Compliance",
+    title: "Keep Your HR on Track",
+    subtitle: "Labour Law & Compliance Support",
+    body: "Keep compliance responsibilities and reporting requirements organized, helping your business maintain proper records and prepare for audits with greater confidence.",
+    cta: "Explore Compliance Solutions",
+    href: "/solutions",
+    icon: Scale,
     tone: "gold",
     capabilities: [
-      { label: "Pulse Surveys", icon: MessageCircle },
-      { label: "Recognition", icon: Award },
-      { label: "Internal Communications", icon: Megaphone },
-      { label: "Employee Feedback", icon: Heart },
-      { label: "Communities", icon: Users },
-      { label: "Wellness Programs", icon: Gift },
+      { label: "Labour Law Compliance", icon: Scale },
+      { label: "POSH Compliance", icon: ShieldCheck },
+      { label: "Compliance Governance and Calendar", icon: CalendarCheck },
+      { label: "Statutory Returns and Reporting", icon: Landmark },
     ],
   },
   {
-    id: "develop",
-    name: "Develop",
-    title: "Grow skills, careers, and future leaders.",
-    body: "Connect performance, learning, and career paths so development is planned — not left to chance.",
-    cta: "Explore Develop Solutions",
-    href: "/hr-tech",
+    id: "performance",
+    name: "Performance",
+    title: "Turn Goals into Progress",
+    subtitle: "Performance Management",
+    body: "Bring clarity to goals, feedback, and reviews with a structured approach that helps leaders track progress, recognise contributions, and support improvement.",
+    cta: "Explore Performance Solutions",
+    href: "/solutions",
     icon: TrendingUp,
     tone: "gold",
     capabilities: [
-      { label: "Learning Paths", icon: GraduationCap },
-      { label: "Performance Reviews", icon: ClipboardCheck },
-      { label: "Goals & KPIs", icon: Target },
-      { label: "Career Planning", icon: TrendingUp },
-      { label: "Skills Mapping", icon: BarChart3 },
-      { label: "Mentoring", icon: Users },
-    ],
-  },
-  {
-    id: "retain",
-    name: "Retain",
-    title: "Support the people you cannot afford to lose.",
-    body: "Tie compensation, benefits, and growth into one view so you can act early and keep your best people.",
-    cta: "Explore Retain Solutions",
-    href: "/hr-tech",
-    icon: Award,
-    tone: "gold",
-    capabilities: [
-      { label: "Compensation", icon: Wallet },
-      { label: "Benefits", icon: Gift },
-      { label: "Career Growth", icon: TrendingUp },
-      { label: "Stay Interviews", icon: MessageCircle },
-      { label: "Rewards", icon: Star },
-      { label: "Internal Mobility", icon: Building2 },
-    ],
-  },
-  {
-    id: "transition",
-    name: "Transition",
-    title: "Handle exits with care, clarity, and compliance.",
-    body: "Guide offboarding, knowledge transfer, and settlements so every transition is complete — for the person and the business.",
-    cta: "Explore Transition Solutions",
-    href: "/hr-tech",
-    icon: DoorOpen,
-    tone: "gold",
-    capabilities: [
-      { label: "Resignations", icon: LogOut },
-      { label: "Knowledge Transfer", icon: FileText },
-      { label: "Exit Interviews", icon: MessageCircle },
-      { label: "Full & Final", icon: Wallet },
-      { label: "Alumni Network", icon: Users },
-      { label: "Compliance Records", icon: ClipboardCheck },
+      { label: "Goal Setting and Tracking", icon: Target },
+      { label: "Review Cycles", icon: ClipboardCheck },
+      { label: "Feedback and Recognition", icon: MessageSquareHeart },
+      { label: "Performance Reports for Leadership", icon: BarChart3 },
     ],
   },
 ];
@@ -189,10 +143,8 @@ const GAP = 36;
 const LABEL_LAYOUT = [
   { transform: `translate(-50%, calc(-100% - ${GAP}px))`, align: "center", nowrap: true },
   { transform: `translate(${GAP}px, -50%)`, align: "left", nowrap: true },
-  { transform: `translate(${GAP}px, -50%)`, align: "left", nowrap: true },
-  { transform: `translate(-50%, ${GAP}px)`, align: "center", nowrap: true },
+  { transform: `translate(${GAP}px, -20%)`, align: "left", nowrap: true },
   { transform: `translate(calc(-100% - ${GAP}px), -20%)`, align: "right", nowrap: true },
-  { transform: `translate(calc(-100% - ${GAP}px), -50%)`, align: "right", nowrap: true },
   { transform: `translate(calc(-100% - ${GAP}px), -50%)`, align: "right", nowrap: true },
 ] as const;
 
@@ -210,20 +162,26 @@ export function EmployeeLifecycle() {
       <div className="mx-auto max-w-3xl text-center">
         <p className="mb-3 flex items-center justify-center gap-3 text-[11px] font-bold uppercase tracking-[0.28em] text-gold">
           <span className="h-px w-10 bg-gold/50" aria-hidden />
-          HRMS Platform
+          Integrated HR Solutions
           <span className="h-px w-10 bg-gold/50" aria-hidden />
         </p>
         <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
-          <span className="text-navy">One Platform for Your</span>
-          <span className="mt-1 block text-gold">Entire Employee Lifecycle</span>
+          <span className="text-navy">Every Stage of Your Employee Journey,</span>
+          <span className="mt-1 block text-gold">Handled End to End</span>
         </h2>
+        <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
+          Cerity People combines HR expertise with technology-driven solutions to simplify
+          people operations, strengthen HR processes and support growth. From everyday HR
+          administration to ongoing employee management, you get one partner and one process
+          instead of several vendors.
+        </p>
       </div>
 
       <div className="mt-12 grid items-center gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-6">
         <div
           className="relative mx-auto aspect-square w-full max-w-[600px]"
           role="listbox"
-          aria-label="Employee lifecycle stages"
+          aria-label="Employee journey stages"
           aria-activedescendant={`${uid}-stage-${stage.id}`}
         >
           <svg className="pointer-events-none absolute inset-[18%] h-[64%] w-[64%]" viewBox="0 0 400 400" aria-hidden>
@@ -335,6 +293,9 @@ export function EmployeeLifecycle() {
                 <h3 className="mt-3 max-w-[420px] text-2xl font-bold tracking-[-0.03em] text-navy sm:text-[1.75rem] sm:leading-snug">
                   {stage.title}
                 </h3>
+                {stage.subtitle ? (
+                  <p className="mt-2 text-sm font-semibold text-gold">{stage.subtitle}</p>
+                ) : null}
                 <p className="mt-3 max-w-[460px] text-sm leading-6 text-slate-600 sm:text-[15px] sm:leading-7">
                   {stage.body}
                 </p>
@@ -359,7 +320,7 @@ export function EmployeeLifecycle() {
                 <StageIcon className="h-4 w-4 text-primary" strokeWidth={2} />
                 Key Capabilities
               </p>
-              <ul className="mt-3 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+              <ul className="mt-3 grid gap-2.5 sm:grid-cols-2">
                 {stage.capabilities.map((cap) => {
                   const CapIcon = cap.icon;
                   return (

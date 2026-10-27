@@ -78,7 +78,15 @@ export function Footer() {
                 isContact ? "text-white/80" : "text-slate-600",
               )}
             >
-              {siteConfig.description}
+              <span
+                className={cn(
+                  "mb-1 block font-semibold",
+                  isContact ? "text-white" : "text-navy",
+                )}
+              >
+                {siteConfig.name}: {siteConfig.footer.tagline}
+              </span>
+              {siteConfig.footer.description}
             </p>
             <div className="mt-6 flex gap-3">
               {social.map(({ href, label, icon: Icon }) => (
