@@ -8,11 +8,15 @@ export function CTASection({
   description,
   buttonLabel = "Book a Consultation",
   buttonHref = "/contact",
+  secondaryLabel,
+  secondaryHref,
 }: {
   title: string;
   description: string;
   buttonLabel?: string;
   buttonHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
 }) {
   return (
     <section className="relative overflow-hidden section-padding pb-20" aria-labelledby="cta-heading">
@@ -40,8 +44,15 @@ export function CTASection({
               >
                 {buttonLabel}
               </ButtonLink>
-             
-             
+              {secondaryLabel && secondaryHref ? (
+                <ButtonLink
+                  href={secondaryHref}
+                  variant="outline"
+                  className="w-full text-center sm:w-auto lg:w-full"
+                >
+                  {secondaryLabel}
+                </ButtonLink>
+              ) : null}
             </div>
           </div>
         </div>

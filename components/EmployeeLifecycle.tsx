@@ -38,10 +38,12 @@ type Stage = {
   href: string;
   icon: LucideIcon;
   tone: "blue" | "gold";
+  /** Set true to hide a stage that is not ready to show yet. */
+  hidden?: boolean;
   capabilities: { label: string; icon: LucideIcon }[];
 };
 
-const STAGES: Stage[] = [
+const ALL_STAGES: Stage[] = [
   {
     id: "recruitment",
     name: "Recruitment",
@@ -111,6 +113,7 @@ const STAGES: Stage[] = [
   },
   {
     id: "performance",
+    hidden: true,
     name: "Performance",
     title: "Turn Goals into Progress",
     subtitle: "Performance Management",
@@ -128,6 +131,7 @@ const STAGES: Stage[] = [
   },
 ];
 
+const STAGES = ALL_STAGES.filter((stage) => !stage.hidden);
 const COUNT = STAGES.length;
 
 function polar(index: number, radius: number) {
@@ -143,8 +147,7 @@ const GAP = 36;
 const LABEL_LAYOUT = [
   { transform: `translate(-50%, calc(-100% - ${GAP}px))`, align: "center", nowrap: true },
   { transform: `translate(${GAP}px, -50%)`, align: "left", nowrap: true },
-  { transform: `translate(${GAP}px, -20%)`, align: "left", nowrap: true },
-  { transform: `translate(calc(-100% - ${GAP}px), -20%)`, align: "right", nowrap: true },
+  { transform: `translate(-50%, ${GAP}px)`, align: "center", nowrap: true },
   { transform: `translate(calc(-100% - ${GAP}px), -50%)`, align: "right", nowrap: true },
 ] as const;
 
@@ -177,7 +180,7 @@ export function EmployeeLifecycle() {
         </p>
       </div>
 
-      <div className="mt-12 grid items-center gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-6">
+      <div className="mt-12 grid items-center gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-12">
         <div
           className="relative mx-auto aspect-square w-full max-w-[600px]"
           role="listbox"

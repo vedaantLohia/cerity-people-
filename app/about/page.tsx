@@ -2,6 +2,7 @@ import { CheckCircle2 } from "lucide-react";
 import { BenefitCard } from "@/components/BenefitCard";
 import { BrandBackground } from "@/components/BrandBackground";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { HeroSection } from "@/components/HeroSection";
 import { HomePageClass } from "@/components/HomePageClass";
@@ -46,10 +47,12 @@ export default function AboutPage() {
         <div className="relative pt-16 lg:pt-[4.5rem]">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "About Us" }]} />
           <HeroSection
-            title="Technology Meets HR Expertise"
-            description="We combine HR technology, automation, consulting, and compliance expertise to help organizations build efficient and scalable HR operations — for startups, SMBs, and enterprises."
+            title="HR That Works Better for People and Business."
+            description="Managing people should not mean managing endless processes. Cerity People brings HR technology, practical systems and experienced professionals together to help businesses hire, support, pay and manage their people with greater confidence."
             size="compact"
-          />
+          >
+            <ButtonLink href="/contact">Talk to Our Team</ButtonLink>
+          </HeroSection>
         </div>
       </section>
 
@@ -311,6 +314,8 @@ export default function AboutPage() {
       <CTASection
         title="Let’s Make HR Work Better for Your Business."
         description="Discover a more connected way to hire, manage, and support your people with Cerity People."
+        secondaryLabel="Contact Us"
+        secondaryHref="/contact"
       />
     </>
   );
