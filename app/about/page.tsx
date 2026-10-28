@@ -3,6 +3,7 @@ import { BenefitCard } from "@/components/BenefitCard";
 import { BrandBackground } from "@/components/BrandBackground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ButtonLink } from "@/components/ButtonLink";
+import { TeamMember } from "@/components/TeamMember";
 import { CTASection } from "@/components/CTASection";
 import { HeroSection } from "@/components/HeroSection";
 import { HomePageClass } from "@/components/HomePageClass";
@@ -230,67 +231,24 @@ export default function AboutPage() {
           />
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <article className="overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-sm">
-              <div className="aspect-[4/3] overflow-hidden bg-slate-100">
-                <img
-                  src="/rohit.webp"
-                  alt="Rohit Lohia"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="font-semibold text-navy">Rohit Lohia</h3>
-                <p className="text-sm font-medium text-accent">Founder</p>
-                <p className="mt-2 text-sm text-slate-600">
-                  Rohit has 20+ years of experience helping companies expand across borders. He
-                  co-founded Global Upside Corporation, a pioneer in Employer of Record (EOR)
-                  services, and led the development of Mihi, a global HRMS platform with 7,000+
-                  users. As Founder and CEO of Cerity Global, the group behind Cerity People, he
-                  helps companies hire directly, operate compliantly and scale internationally.
-                </p>
-              </div>
-            </article>
-
-            <article className="overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-sm">
-              <div className="aspect-[4/3] overflow-hidden bg-slate-100">
-                <img
-                  src="/indu.webp"
-                  alt="Indu Wadhwa"
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="font-semibold text-navy">Indu Wadhwa</h3>
-                <p className="text-sm font-medium text-accent">HR Leader</p>
-                <p className="mt-2 text-sm text-slate-600">
-                  Indu has about 30 years of experience in HR and general management across
-                  industries including manufacturing, IT and telecom, hospitality, health and
-                  BPO. She also brings 10+ years in consulting, specializing in Prevention of
-                  Sexual Harassment (POSH), HR advisory and policy design, and organization
-                  development. At Cerity Global, she leads global HR strategy and people
-                  operations.
-                </p>
-              </div>
-            </article>
-
-            <article className="overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-sm">
-              <div
-                className="aspect-[4/3] bg-gradient-to-br from-slate-200 to-slate-300"
-                aria-hidden
-              />
-              <div className="p-5">
-                <h3 className="font-semibold text-navy">Pallavi</h3>
-                <p className="text-sm font-medium text-accent">Chief Executive Officer</p>
-                <p className="mt-2 text-sm text-slate-600">
-                  Pallavi has 22+ years of HR experience across India and 30+ countries. She helps
-                  organizations build workplaces that are compliant and genuinely people-first,
-                  from HR frameworks and performance systems to POSH support end to end: SHe-Box
-                  registration, Internal Committee setup, training, audits and annual filings. She
-                  also serves as an External Member on ICs and coaches leaders in emotional
-                  intelligence.
-                </p>
-              </div>
-            </article>
+            <TeamMember
+              name="Rohit Lohia"
+              title="Founder"
+              photo="/rohit.webp"
+              bio="Rohit has 20+ years of experience helping companies expand across borders. He co-founded Global Upside Corporation, a pioneer in Employer of Record (EOR) services, and led the development of Mihi, a global HRMS platform with 7,000+ users. As Founder and CEO of Cerity Global, the group behind Cerity People, he helps companies hire directly, operate compliantly and scale internationally."
+            />
+            <TeamMember
+              name="Indu Wadhwa"
+              title="HR Leader"
+              photo="/indu.webp"
+              photoClassName="object-top"
+              bio="Indu has about 30 years of experience in HR and general management across industries including manufacturing, IT and telecom, hospitality, health and BPO. She also brings 10+ years in consulting, specializing in Prevention of Sexual Harassment (POSH), HR advisory and policy design, and organization development. At Cerity Global, she leads global HR strategy and people operations."
+            />
+            <TeamMember
+              name="Pallavi"
+              title="Chief Executive Officer"
+              bio="Pallavi has 22+ years of HR experience across India and 30+ countries. She helps organizations build workplaces that are compliant and genuinely people-first, from HR frameworks and performance systems to POSH support end to end: SHe-Box registration, Internal Committee setup, training, audits and annual filings. She also serves as an External Member on ICs and coaches leaders in emotional intelligence."
+            />
           </div>
         </div>
       </section>
