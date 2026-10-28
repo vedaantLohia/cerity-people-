@@ -78,7 +78,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition-colors duration-200",
+        "relative z-50 border-b transition-colors duration-200",
         scrolled && "overflow-hidden shadow-sm",
         scrolled && motif.fill === "navy" && "border-white/10 bg-navy/90 backdrop-blur-md",
         scrolled && motif.fill === "cream" && "border-slate-200/60 bg-cream",

@@ -254,7 +254,7 @@ export default function AboutPage() {
                 <img
                   src="/indu.webp"
                   alt="Indu Wadhwa"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-top"
                 />
               </div>
               <div className="p-5">

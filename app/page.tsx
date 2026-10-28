@@ -7,15 +7,11 @@ import { HomePageClass } from "@/components/HomePageClass";
 import { JsonLd } from "@/components/JsonLd";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
-import { TestimonialCard } from "@/components/TestimonialCard";
-import { TrustBar } from "@/components/TrustBar";
 import {
   approachSteps,
   expertServices,
   homeFaqs,
   homeWhyCerity,
-  testimonials,
-  trustLogos,
 } from "@/lib/data";
 import { siteConfig } from "@/lib/site-config";
 import { buildMetadata, faqSchema } from "@/lib/seo";
@@ -80,8 +76,6 @@ export default function HomePage() {
     </div>
   </div>
 </section>
-
-      <TrustBar logos={trustLogos} />
 
       
 
@@ -167,23 +161,6 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="relative overflow-hidden section-padding border-t border-slate-100">
-        <BrandBackground variant="testimonials" />
-        <div className="container relative">
-          <SectionHeading
-            eyebrow="Customer stories"
-            title="Results leaders trust"
-            description={`Teams use ${siteConfig.name} to run payroll with confidence, hire faster, and give HR a strategic seat at the table.`}
-          />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {testimonials.map((t) => (
-              <TestimonialCard key={t.author} {...t} />
-            ))}
-          </div>
         </div>
       </section>
 
