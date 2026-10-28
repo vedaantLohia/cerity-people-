@@ -78,7 +78,7 @@ export function TeamMember({
         aria-label={`${name} profile`}
         onClick={() => setOpen(false)}
         className={cn(
-          "absolute inset-x-0 top-0 z-20 origin-top rounded-xl border border-slate-200/80 bg-white p-5 shadow-2xl shadow-navy/20 transition duration-200",
+          "absolute inset-x-0 top-0 z-20 max-h-[26rem] origin-top overflow-y-auto rounded-xl border border-slate-200/80 bg-white p-5 shadow-2xl shadow-navy/20 transition duration-200",
           open ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0",
         )}
       >
@@ -101,7 +101,11 @@ export function TeamMember({
             <p className="text-sm font-medium text-accent">{title}</p>
           </div>
         </div>
-        <p className="mt-4 text-sm leading-relaxed text-slate-600">{bio}</p>
+        <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">
+          {bio.split("\n\n").map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
       </div>
     </div>
   );

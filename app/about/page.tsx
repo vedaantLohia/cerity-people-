@@ -230,24 +230,24 @@ export default function AboutPage() {
             description="Cerity People brings together HR knowledge, operational understanding, and a commitment to making people management work better for businesses."
           />
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 pb-28 sm:grid-cols-2 lg:grid-cols-3">
             <TeamMember
               name="Rohit Lohia"
               title="Founder"
               photo="/rohit.webp"
-              bio="Rohit has 20+ years of experience helping companies expand across borders. He co-founded Global Upside Corporation, a pioneer in Employer of Record (EOR) services, and led the development of Mihi, a global HRMS platform with 7,000+ users. As Founder and CEO of Cerity Global, the group behind Cerity People, he helps companies hire directly, operate compliantly and scale internationally."
+              bio={"Rohit Lohia is a recognized leader in global expansion and cross-border operations, with 20+ years of experience helping global brands grow internationally. He specializes in building high-performing global delivery teams and managing international entities, and has supported companies from early-stage setup through full-scale operations and back-office transformation.\n\nHe co-founded Global Upside Corporation, a pioneer in Employer of Record (EOR) services, and as Managing Director of its India operations played a pivotal role in scaling its global delivery platform. Under his leadership, Global Upside helped businesses expand into 150+ countries and set up and manage 70+ of its own subsidiaries. His vision led to the launch of its PEO model and the development of Mihi, a global HRMS platform that reached 7,000+ users before its acquisition by Safeguard Global.\n\nAs Founder and CEO of Cerity Global, he continues that work, helping companies hire directly, operate compliantly and scale their international presence.\n\nRecognition: Marvelous Leaders in HR (2020) · Silver Stevie Award (2019)"}
             />
             <TeamMember
               name="Indu Wadhwa"
               title="HR Leader"
               photo="/indu.webp"
               photoClassName="object-top"
-              bio="Indu has about 30 years of experience in HR and general management across industries including manufacturing, IT and telecom, hospitality, health and BPO. She also brings 10+ years in consulting, specializing in Prevention of Sexual Harassment (POSH), HR advisory and policy design, and organization development. At Cerity Global, she leads global HR strategy and people operations."
+              bio={"Indu Wadhwa is a recognized HR leader with about 30 years of experience in HR and general management across industries including services, manufacturing, IT and telecom, hospitality, power, health, BPO and export.\n\nShe also brings 10+ years in consulting, with a focus on Prevention of Sexual Harassment (POSH), coaching and mentoring, career transition coaching, organization development, assessment and development centers, and workshops. Her consulting work includes HR advisory, drafting HR policy manuals, streamlining processes, and serving as an external expert on interview panels.\n\nIndu has designed and implemented HR initiatives aligned with core business objectives, contributing directly to company growth. She has been visiting faculty at several management institutes and has written management articles for business magazines.\n\nAt Cerity Global, she leads global HR strategy and people operations, ensuring scalable HR processes, compliant local execution, and an employee experience that supports long-term growth."}
             />
             <TeamMember
-              name="Pallavi"
+              name="Pallavi Chaudhary"
               title="Chief Executive Officer"
-              bio="Pallavi has 22+ years of HR experience across India and 30+ countries. She helps organizations build workplaces that are compliant and genuinely people-first, from HR frameworks and performance systems to POSH support end to end: SHe-Box registration, Internal Committee setup, training, audits and annual filings. She also serves as an External Member on ICs and coaches leaders in emotional intelligence."
+              bio={"Pallavi Chaudhary is a strategic HR leader, POSH expert and emotional intelligence coach with 22+ years of experience across India and 30+ countries in APAC, EMEA, LATAM and the UK. She helps organizations build workplaces that are not just compliant, but genuinely people-first. Combining systems thinking with a deep understanding of people, she guides leadership teams through restructuring, rapid growth and cultural resets without breaking the human fabric of the organization. She designs HR frameworks, performance systems and onboarding processes that give businesses a scalable foundation, while helping them align employees with the company’s vision and retain high-potential talent.\n\nPallavi turns POSH from a checkbox into a culture. She supports organizations end to end, from SHe-Box registration and Internal Committee setup to training, compliance audits and annual filings, and serves as an External Member on ICs across multiple organizations. Through emotional intelligence coaching and mindfulness-based leadership programs, she also helps technically strong leaders become more humanly connected.\n\nShe also supports women who have paused their careers or lost their confidence, helping them return to work and to themselves."}
             />
           </div>
         </div>
