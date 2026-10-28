@@ -247,6 +247,8 @@ export default function AboutPage() {
             <TeamMember
               name="Pallavi Chaudhary"
               title="Chief Executive Officer"
+              photo="/pallavi.jpg"
+              photoClassName="object-[50%_25%]"
               bio={"Pallavi Chaudhary is a strategic HR leader, POSH expert and emotional intelligence coach with 22+ years of experience across India and 30+ countries in APAC, EMEA, LATAM and the UK. She helps organizations build workplaces that are not just compliant, but genuinely people-first. Combining systems thinking with a deep understanding of people, she guides leadership teams through restructuring, rapid growth and cultural resets without breaking the human fabric of the organization. She designs HR frameworks, performance systems and onboarding processes that give businesses a scalable foundation, while helping them align employees with the company’s vision and retain high-potential talent.\n\nPallavi turns POSH from a checkbox into a culture. She supports organizations end to end, from SHe-Box registration and Internal Committee setup to training, compliance audits and annual filings, and serves as an External Member on ICs across multiple organizations. Through emotional intelligence coaching and mindfulness-based leadership programs, she also helps technically strong leaders become more humanly connected.\n\nShe also supports women who have paused their careers or lost their confidence, helping them return to work and to themselves."}
             />
           </div>
