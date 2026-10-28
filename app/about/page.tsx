@@ -242,9 +242,11 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-navy">Rohit Lohia</h3>
                 <p className="text-sm font-medium text-accent">Founder</p>
                 <p className="mt-2 text-sm text-slate-600">
-                  Rohit brings over 15 years of experience leading HR transformation programs for
-                  global enterprises. His focus is on building practical, scalable approaches that
-                  connect people operations with business objectives.
+                  Rohit has 20+ years of experience helping companies expand across borders. He
+                  co-founded Global Upside Corporation, a pioneer in Employer of Record (EOR)
+                  services, and led the development of Mihi, a global HRMS platform with 7,000+
+                  users. As Founder and CEO of Cerity Global, the group behind Cerity People, he
+                  helps companies hire directly, operate compliantly and scale internationally.
                 </p>
               </div>
             </article>
@@ -261,9 +263,12 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-navy">Indu Wadhwa</h3>
                 <p className="text-sm font-medium text-accent">HR Leader</p>
                 <p className="mt-2 text-sm text-slate-600">
-                  Indu brings experience across HR technology and workforce strategy, helping
-                  shape structured, thoughtful approaches to HR operations and employee
-                  management.
+                  Indu has about 30 years of experience in HR and general management across
+                  industries including manufacturing, IT and telecom, hospitality, health and
+                  BPO. She also brings 10+ years in consulting, specializing in Prevention of
+                  Sexual Harassment (POSH), HR advisory and policy design, and organization
+                  development. At Cerity Global, she leads global HR strategy and people
+                  operations.
                 </p>
               </div>
             </article>
@@ -277,9 +282,12 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-navy">Pallavi</h3>
                 <p className="text-sm font-medium text-accent">Chief Executive Officer</p>
                 <p className="mt-2 text-sm text-slate-600">
-                  Pallavi brings practical HR and people operations expertise, with a focus on
-                  establishing effective processes that help businesses manage their employees
-                  with greater clarity and consistency.
+                  Pallavi has 22+ years of HR experience across India and 30+ countries. She helps
+                  organizations build workplaces that are compliant and genuinely people-first,
+                  from HR frameworks and performance systems to POSH support end to end: SHe-Box
+                  registration, Internal Committee setup, training, audits and annual filings. She
+                  also serves as an External Member on ICs and coaches leaders in emotional
+                  intelligence.
                 </p>
               </div>
             </article>
