@@ -4,7 +4,6 @@ import { BrandBackground } from "@/components/BrandBackground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ButtonLink } from "@/components/ButtonLink";
 import { TeamPanel } from "@/components/TeamPanel";
-import { CTASection } from "@/components/CTASection";
 import { HeroSection } from "@/components/HeroSection";
 import { HomePageClass } from "@/components/HomePageClass";
 import { JsonLd } from "@/components/JsonLd";
@@ -281,13 +280,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      <CTASection
-        title="Let’s Make HR Work Better for Your Business."
-        description="Discover a more connected way to hire, manage, and support your people with Cerity People."
-        secondaryLabel="Contact Us"
-        secondaryHref="/contact"
-      />
     </>
   );
 }

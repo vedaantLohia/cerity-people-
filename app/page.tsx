@@ -62,14 +62,7 @@ export default function HomePage() {
             </p>
 
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <ButtonLink href="/contact" className="min-w-[200px] px-8 py-3.5">
-                Book a Consultation
-              </ButtonLink>
-              <ButtonLink
-                href="#employee-journey"
-                variant="outline"
-                className="min-w-[200px] px-8 py-3.5"
-              >
+              <ButtonLink href="#employee-journey" className="min-w-[200px] px-8 py-3.5">
                 See How It Works
               </ButtonLink>
             </div>
@@ -99,14 +92,18 @@ export default function HomePage() {
             title="HR Expertise That Moves Your Business Forward"
             description="Practical HR Support for Your Day-to-Day Needs."
           />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 flex flex-wrap justify-center gap-6">
             {homeExpertServices.map((service) => (
-              <ServiceCard
+              <div
                 key={service.title}
-                title={service.title}
-                description={service.description}
-                href="/consulting"
-              />
+                className="flex w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+              >
+                <ServiceCard
+                  title={service.title}
+                  description={service.description}
+                  href="/consulting"
+                />
+              </div>
             ))}
           </div>
           <div className="mt-10 text-center">
