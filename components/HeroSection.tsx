@@ -18,12 +18,12 @@ export function HeroSection({
   return (
     <section
       className={cn(
-        "relative overflow-hidden",
+        "relative flex overflow-hidden lg:min-h-[calc(100svh-8rem)] lg:items-center",
         size === "default" ? "py-16 sm:py-24" : "py-12 sm:py-16",
         className,
       )}
     >
-      <div className="container relative">
+      <div className="container relative w-full">
         <div className="mx-auto max-w-3xl text-center">
           <h1
             className={cn(
