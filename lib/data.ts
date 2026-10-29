@@ -514,3 +514,7 @@ export const companySizesForm = [
   "501–2000",
   "2000+",
 ] as const;
+
+/** Names used by the Home page. */
+export const homeExpertServices = expertServices;
+export const homeWhyCerityPeople = homeWhyCerity;
