@@ -51,10 +51,10 @@ const footerColumns = [
 
 const social = [
   { href: siteConfig.social.linkedin, label: "LinkedIn", icon: IconLinkedIn },
-  { href: siteConfig.social.facebook, label: "Facebook", icon: IconFacebook },
+  { href: siteConfig.social.facebook, label: "Facebook", icon: IconFacebook, hidden: true },
   { href: siteConfig.social.instagram, label: "Instagram", icon: IconInstagram },
-  { href: siteConfig.social.youtube, label: "YouTube", icon: IconYouTube },
-];
+  { href: siteConfig.social.youtube, label: "YouTube", icon: IconYouTube, hidden: true },
+].filter((item) => !item.hidden);
 
 export function Footer() {
   const pathname = usePathname();
