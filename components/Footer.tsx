@@ -160,9 +160,6 @@ export function Footer() {
             </Link>
           </div>
         </div>
-        <p className={cn("mt-8 text-center text-sm", isContact ? "text-white/70" : "text-slate-500")}>
-          Copyright © {new Date().getFullYear()} {siteConfig.legalName}. All rights reserved.
-        </p>
       </div>
     </footer>
   );
