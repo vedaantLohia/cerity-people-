@@ -26,6 +26,7 @@ export const hrTechModules = [
   { title: "Attendance", description: "Track shifts, hours, and policy compliance." },
   { title: "Leave Management", description: "Policies, balances, approvals, and calendars." },
   { title: "Payroll", description: "Accurate pay runs, deductions, and payslips." },
+  { title: "Performance", description: "Goals, reviews, KPIs, and development plans." },
   { title: "Expense Management", description: "Submit, approve, and reconcile employee expenses." },
   { title: "Asset Management", description: "Assign and track laptops, IDs, and equipment." },
   { title: "HR Analytics", description: "Dashboards for workforce and operational insights." },
