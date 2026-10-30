@@ -13,7 +13,7 @@ import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "HR Technology & HRMS",
   description:
-    "Complete HR technology for the modern workplace. Digitize the employee lifecycle with recruitment, payroll, attendance, performance, and HR analytics.",
+    "Complete HR technology for the modern workplace. Digitize the employee lifecycle with recruitment, payroll, attendance, and HR analytics.",
   path: "/hr-tech",
   keywords: [
     "HRMS Software",

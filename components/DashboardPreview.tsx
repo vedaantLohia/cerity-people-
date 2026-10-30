@@ -3,7 +3,6 @@ import {
   Calendar,
   Clock,
   DollarSign,
-  TrendingUp,
   UserPlus,
   Users,
 } from "lucide-react";
@@ -41,7 +40,6 @@ export function DashboardPreview({
             { icon: Calendar, label: "Leave" },
             { icon: DollarSign, label: "Payroll" },
             { icon: UserPlus, label: "Recruitment" },
-            { icon: TrendingUp, label: "Performance" },
           ].map(({ icon: Icon, label, active }) => (
             <div
               key={label}

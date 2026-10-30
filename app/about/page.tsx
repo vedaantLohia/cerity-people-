@@ -94,7 +94,7 @@ export default function AboutPage() {
             </p>
             <p className="mt-4 text-slate-600 leading-relaxed">
               As businesses grow, managing people becomes more demanding. Hiring, onboarding,
-              payroll, employee records, compliance and performance all need time, coordination
+              payroll, employee records and compliance all need time, coordination
               and consistency. When these run separately, important work gets harder to manage.
             </p>
             <p className="mt-4 text-slate-600 leading-relaxed">
@@ -107,15 +107,14 @@ export default function AboutPage() {
               <span className="font-semibold text-navy">Our story: </span>
               Cerity People began with a common problem: as businesses grow, HR work gets split
               across separate people, tools and spreadsheets, and the cost shows up in delays,
-              errors and compliance risk. We set out to bring hiring, onboarding, payroll,
-              compliance and performance into one connected approach, combining technology with
+              errors and compliance risk. We set out to bring hiring, onboarding, payroll
+              and compliance into one connected approach, combining technology with
               experienced HR professionals, so businesses of any size can manage their people
               with confidence.
             </p>
             <p className="mt-4 text-slate-600 leading-relaxed">
               Cerity People is backed by Cerity Global, a California-headquartered global
-              expansion partner with 20+ years of experience in HR, payroll, tax and compliance,
-              and a presence in 170+ countries.
+              expansion partner with 20+ years of experience in HR, payroll, tax and compliance.
             </p>
           </div>
           <div className="space-y-6">

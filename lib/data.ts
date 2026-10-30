@@ -26,7 +26,6 @@ export const hrTechModules = [
   { title: "Attendance", description: "Track shifts, hours, and policy compliance." },
   { title: "Leave Management", description: "Policies, balances, approvals, and calendars." },
   { title: "Payroll", description: "Accurate pay runs, deductions, and payslips." },
-  { title: "Performance", description: "Goals, reviews, KPIs, and development plans." },
   { title: "Expense Management", description: "Submit, approve, and reconcile employee expenses." },
   { title: "Asset Management", description: "Assign and track laptops, IDs, and equipment." },
   { title: "HR Analytics", description: "Dashboards for workforce and operational insights." },
@@ -186,18 +185,13 @@ export const aboutJourney = [
     description:
       "Labour law, POSH and statutory requirements managed with structure, so your records stay in order.",
   },
-  {
-    title: "Performance",
-    description:
-      "Clear goals, feedback and review cycles that help leaders track progress and support improvement.",
-  },
 ];
 
 export const aboutWhyChoose = [
   {
     title: "One Partner, Complete HR",
     description:
-      "Recruitment, onboarding, payroll, compliance and performance with one team.",
+      "Recruitment, onboarding, payroll and compliance with one team.",
   },
   {
     title: "Experts, Not Just Software",
@@ -339,10 +333,6 @@ export const consultingServicesDetailed = [
   {
     title: "Workforce Planning",
     description: "Build effective workforce structures and resource plans.",
-  },
-  {
-    title: "Performance Management",
-    description: "Design goal-setting and performance review frameworks.",
   },
   
 ];

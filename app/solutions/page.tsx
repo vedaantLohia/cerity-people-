@@ -163,13 +163,6 @@ export default function SolutionsPage() {
 
     },
 
-    {
-      feature:"Performance Management",
-      basic:false,
-      executive:false,
-      professional:true,
-    },
-
   ];
 
    const plans = [
@@ -211,7 +204,6 @@ export default function SolutionsPage() {
         "Posh Training",
         "Posh committee",
         "POSH & Workplace Compliance",
-        "Performance Management",
       ],
       featured: false,
     },
