@@ -5,12 +5,7 @@ import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
-import {
-  IconFacebook,
-  IconInstagram,
-  IconLinkedIn,
-  IconYouTube,
-} from "./SocialIcons";
+import { IconInstagram, IconLinkedIn } from "./SocialIcons";
 
 const footerColumns = [
   {
@@ -51,10 +46,8 @@ const footerColumns = [
 
 const social = [
   { href: siteConfig.social.linkedin, label: "LinkedIn", icon: IconLinkedIn },
-  { href: siteConfig.social.facebook, label: "Facebook", icon: IconFacebook, hidden: true },
   { href: siteConfig.social.instagram, label: "Instagram", icon: IconInstagram },
-  { href: siteConfig.social.youtube, label: "YouTube", icon: IconYouTube, hidden: true },
-].filter((item) => !item.hidden);
+];
 
 export function Footer() {
   const pathname = usePathname();
