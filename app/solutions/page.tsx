@@ -201,9 +201,10 @@ export default function SolutionsPage() {
         "Flexible people operations support designed around your workforce and business requirements.",
       features: [
         "Employee Relations & Disciplinary Matters",
-        "Posh Training",
-        "Posh committee",
-        "POSH & Workplace Compliance",
+        "End-to-end POSH governance",
+        "POSH awareness training",
+        "POSH IC capacity building training",
+        "External representation on POSH Committee",
       ],
       featured: false,
     },
@@ -222,7 +223,7 @@ export default function SolutionsPage() {
       <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Solutions" }]} />
       <HeroSection
         title="Solutions Designed Around Your Business"
-        description="Whether you need to automate payroll, hire faster, or transform HR end-to-end, we align technology and consulting to your context."
+        description="Whether you need to automate payroll, hire faster, or transform HR end-to-end, we align consulting and technology to your context."
         size="compact"
       />
 

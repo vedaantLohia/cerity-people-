@@ -35,7 +35,7 @@ const teamPeople = [
   },
   {
     name: "Indu Wadhwa",
-    title: "HR Leader",
+    title: "Chief HR Strategist & Mentor",
     photo: "/indu.webp",
     photoClassName: "object-top",
     bio: "Indu Wadhwa is a recognized HR leader with about 30 years of experience in HR and general management across industries including services, manufacturing, IT and telecom, hospitality, power, health, BPO and export.\n\nShe also brings 10+ years in consulting, with a focus on Prevention of Sexual Harassment (POSH), coaching and mentoring, career transition coaching, organization development, assessment and development centers, and workshops. Her consulting work includes HR advisory, drafting HR policy manuals, streamlining processes, and serving as an external expert on interview panels.\n\nIndu has designed and implemented HR initiatives aligned with core business objectives, contributing directly to company growth. She has been visiting faculty at several management institutes and has written management articles for business magazines.\n\nAt Cerity Global, she leads global HR strategy and people operations, ensuring scalable HR processes, compliant local execution, and an employee experience that supports long-term growth.",
@@ -71,7 +71,7 @@ export default function AboutPage() {
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "About Us" }]} />
           <HeroSection
             title="HR That Works Better for People and Business."
-            description="Managing people should not mean managing endless processes. Cerity People brings HR technology, practical systems and experienced professionals together to help businesses hire, support, pay and manage their people with greater confidence."
+            description="Managing people should not mean managing endless processes. Cerity People brings experienced professionals, practical systems and HR technology together to help businesses hire, support, pay and manage their people with greater confidence."
             size="compact"
           >
             <ButtonLink href="/contact">Talk to Our Team</ButtonLink>
@@ -99,7 +99,7 @@ export default function AboutPage() {
             </p>
             <p className="mt-4 text-slate-600 leading-relaxed">
               We bring these functions together through technology-enabled processes and
-              hands-on expertise. Whether a business is hiring its first employees or
+              hands-on expertise. Whether a business is hiring employees or
               strengthening established HR operations, Cerity People helps create the structure,
               clarity and support it needs to move forward.
             </p>
@@ -118,17 +118,17 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="space-y-6">
-            <div className="rounded-xl border border-[rgba(8,32,56,0.08)] bg-soft-white p-6">
-              <h2 className="text-lg font-semibold text-navy">Our Mission</h2>
-              <p className="mt-2 text-slate-600">
-                To make HR simpler, smarter, and more strategic through technology and expertise.
-              </p>
-            </div>
             <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="text-lg font-semibold text-navy">Our Vision</h2>
               <p className="mt-2 text-slate-600">
-                To build workplaces where technology empowers people, and businesses perform at
-                their best.
+                To build workplaces where human insights and technology to work on harmony,
+                enabling people to thrive &amp; business to work at their best.
+              </p>
+            </div>
+            <div className="rounded-xl border border-[rgba(8,32,56,0.08)] bg-soft-white p-6">
+              <h2 className="text-lg font-semibold text-navy">Our Mission</h2>
+              <p className="mt-2 text-slate-600">
+                To make HR simpler, smarter, and strategic through expertise and technology.
               </p>
             </div>
           </div>
@@ -140,8 +140,8 @@ export default function AboutPage() {
         <div className="container relative">
           <SectionHeading
             eyebrow="What we are building"
-            title="Technology Is the Tool. Better HR Is the Goal."
-            description="We believe the future of HR is not about adding more tools. It is about making the whole experience work better. Effective HR needs the right combination of technology, expertise and accountability."
+            title="Technology Is the Tool. Effective HR Is the Goal."
+            description="We believe the future of HR is not about adding more tools. Effective HR needs the right combination of expertise, accountability and technology."
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {aboutBuilding.map((item, i) => (
@@ -260,21 +260,10 @@ export default function AboutPage() {
         <BrandBackground variant="about" />
         <div className="container relative">
           <SectionHeading eyebrow="Our commitment" title="Better HR Is Built Every Day." />
-          <div className="mx-auto mt-8 max-w-3xl space-y-4 text-center leading-relaxed text-slate-600">
-            <p>
-              We know that effective HR is not defined by a single system, process, or
-              interaction. It is built through consistent work, dependable support, thoughtful
-              decisions, and a willingness to improve.
-            </p>
-            <p>
-              At Cerity People, we are committed to making HR more connected, practical, and
-              people-focused. As technology evolves and business needs change, we will continue
-              working toward a simpler and more effective experience for the people who keep
-              businesses moving.
-            </p>
+          <div className="mx-auto mt-8 max-w-3xl text-center leading-relaxed text-slate-600">
             <p className="font-semibold text-navy">
-              Because when HR works better, people can do their best work — and businesses are
-              better positioned to grow.
+              When HR is driven by strategic insight and sound judgement, organisations unlock
+              human potential, build enabling workplaces, and achieve sustainable business growth.
             </p>
           </div>
         </div>

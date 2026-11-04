@@ -36,7 +36,7 @@ export default function ContactPage() {
       <HeroSection
         inverted
         title="Let's Talk About Your HR Challenges"
-        description="Tell us about your HR requirements and our experts will help you identify the right technology or consulting solution."
+        description="Tell us about your HR requirements and our experts will help you identify the right consulting or technology solution."
         size="compact"
       />
 

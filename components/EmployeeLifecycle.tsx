@@ -49,7 +49,7 @@ const ALL_STAGES: Stage[] = [
     name: "Recruitment",
     title: "Find the Right Fit, Faster",
     subtitle: "Recruitment & Talent Acquisition",
-    body: "Connect with the right talent through a more organized hiring process, from defining the role to evaluating candidates and preparing offers. Less time on coordination. More focus on the right hire.",
+    body: "Connect with the right talent through an organized hiring process, from defining the role to evaluating candidates and preparing offers. Less time on coordination. More focus on the right hire.",
     cta: "Explore Recruitment Solutions",
     href: "/solutions",
     icon: Users,
@@ -82,7 +82,7 @@ const ALL_STAGES: Stage[] = [
     id: "payroll",
     name: "Payroll & Compensation",
     title: "Every Pay Cycle, in Order",
-    body: "Bring accuracy and clarity to payroll, compensation and employee payouts, from monthly salaries to final settlements. Every pay run is checked, timely and fully controlled.",
+    body: "Bring accuracy and clarity to payroll, compensation and employee payouts, from monthly salaries to final settlements. Every pay run is timely checked and fully controlled.",
     cta: "Explore Payroll Solutions",
     href: "/solutions",
     icon: Wallet,
@@ -175,7 +175,7 @@ export function EmployeeLifecycle() {
         <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
           Cerity People combines HR expertise with technology-driven solutions to simplify
           people operations, strengthen HR processes and support growth. From everyday HR
-          administration to ongoing employee management, you get one partner and one process
+          administration to ongoing talent management, you get one partner
           instead of several vendors.
         </p>
       </div>

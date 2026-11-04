@@ -22,7 +22,7 @@ const SHOW_HOME_TESTIMONIALS = false;
 export const metadata = buildMetadata({
   title: "Hire, Onboard, Pay & Manage Your People",
   description:
-    "Cerity People brings HR technology and expert HR support together, so your team spends less time on administration and more time on growth. From the first job description to the final settlement, we keep your people processes accurate, compliant and organized.",
+    "Cerity People brings HR, Technology and HR expert support together, so your team spends less time on administration and more time on growth. From the first job description to the final settlement, we keep your people processes accurate, compliant and organized.",
   path: "/",
   keywords: [
     "HR Technology",
@@ -55,7 +55,7 @@ export default function HomePage() {
             </h1>
 
             <p className="mx-auto mt-6 max-w-[720px] text-base leading-relaxed text-slate-600 sm:text-lg lg:text-[18px] lg:leading-[1.65]">
-              Cerity People brings HR technology and expert HR support together, so your team
+              Cerity People brings HR, Technology and HR expert support together, so your team
               spends less time on administration and more time on growth. From the first job
               description to the final settlement, we keep your people processes accurate,
               compliant and organized.

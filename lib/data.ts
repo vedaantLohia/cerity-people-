@@ -43,7 +43,7 @@ export const consultingServices = [
 
 export const whyChooseUs = [
   {
-    title: "Technology + Human Expertise",
+    title: "Human Expertise + Technology",
     description: "Platform power backed by consultants who understand your context.",
   },
   {
@@ -123,9 +123,9 @@ export const expertServices = [
 
 export const homeWhyCerity = [
   {
-    title: "Technology Meets HR Expertise",
+    title: "HR Expertise Meets Technology",
     description:
-      "Bring technology and practical HR knowledge together to make everyday people processes more organized and manageable.",
+      "Bring practical HR knowledge and technology together to make everyday people processes more organized and manageable.",
   },
   {
     title: "Support Across the Employee Journey",
@@ -135,7 +135,7 @@ export const homeWhyCerity = [
   {
     title: "Processes That Grow With You",
     description:
-      "Build a more structured approach to HR that can adapt as your business expands and your needs evolve.",
+      "Build a structured approach to HR that can adapt as your business expands and your needs evolve.",
   },
   {
     title: "A More Organized Way to Manage HR",
@@ -155,7 +155,7 @@ export const aboutBuilding = [
       "Technology can organize a process, but people bring context and judgment. Experienced HR professionals stay at the center of every meaningful decision.",
   },
   {
-    title: "One Connected Approach",
+    title: "One Integrated Approach",
     description:
       "Instead of treating each HR activity as a separate task, we look at how people processes work together, so your operations stay consistent.",
   },
@@ -256,7 +256,7 @@ export const aboutPrinciples = [
   {
     title: "Innovation",
     description:
-      "We keep finding better ways to combine technology, expertise, and efficient processes.",
+      "We keep finding better ways to combine expertise, technology, and efficient processes.",
   },
   {
     title: "Integrity",
@@ -291,7 +291,7 @@ export const hrmsModulesDetailed = [
       "Centralized employee profiles, documents, organizational structures and employee records.",
   },
   {
-    title: "Recruitment / ATS",
+    title: "Recruitment",
     description:
       "Manage candidates, vacancies, interviews and recruitment workflows.",
   },
@@ -332,8 +332,8 @@ export const consultingServicesDetailed = [
     description: "Support organizations with HR and employment compliance requirements.",
   },
   {
-    title: "Workforce Planning",
-    description: "Build effective workforce structures and resource plans.",
+    title: "Talent Management",
+    description: "Attract, develop and retain the talent your business needs to grow.",
   },
   
 ];
