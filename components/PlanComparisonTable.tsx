@@ -38,7 +38,7 @@ function Mark({ on, featured }: { on: boolean; featured?: boolean }) {
       className={cn(
         "flex h-7 w-7 items-center justify-center rounded-full text-[12px] font-bold",
         featured
-          ? "bg-gold text-white shadow-[0_6px_16px_rgba(245,158,11,0.28)]"
+          ? "bg-gold text-white shadow-[0_6px_16px_rgba(255,160,0,0.28)]"
           : "bg-gold/15 text-gold",
       )}
       aria-label="Included"
@@ -64,7 +64,7 @@ export function PlanComparisonTable({ rows }: { rows: PlanComparisonRow[] }) {
               className={cn(
                 "h-full rounded-[22px] border backdrop-blur-xl",
                 col.featured
-                  ? "-translate-y-2 border-gold/35 bg-cream/55 shadow-[0_22px_50px_rgba(245,158,11,0.14)]"
+                  ? "-translate-y-2 border-gold/35 bg-cream/55 shadow-[0_22px_50px_rgba(255,160,0,0.14)]"
                   : "border-white/60 bg-white/50 shadow-[0_12px_36px_rgba(8,32,56,0.06)]",
               )}
             />
@@ -86,7 +86,7 @@ export function PlanComparisonTable({ rows }: { rows: PlanComparisonRow[] }) {
               )}
             >
               {col.featured ? (
-                <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold px-3 py-1 text-[9px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_6px_16px_rgba(245,158,11,0.35)]">
+                <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold px-3 py-1 text-[9px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_6px_16px_rgba(255,160,0,0.35)]">
                   Most Popular
                 </span>
               ) : null}
@@ -106,7 +106,7 @@ export function PlanComparisonTable({ rows }: { rows: PlanComparisonRow[] }) {
             <div key={item.feature} className="contents">
               <div
                 className={cn(
-                  "flex items-center border-b border-dashed border-[rgba(245,158,11,0.28)] py-3.5 pr-3",
+                  "flex items-center border-b border-dashed border-[rgba(255,160,0,0.28)] py-3.5 pr-3",
                   index === rows.length - 1 && "border-transparent",
                 )}
               >
@@ -119,7 +119,7 @@ export function PlanComparisonTable({ rows }: { rows: PlanComparisonRow[] }) {
                   key={`${col.key}-${item.feature}`}
                   className={cn(
                     "flex items-center justify-center border-b border-dashed py-3.5",
-                    col.featured ? "border-[rgba(245,158,11,0.22)]" : "border-[rgba(8,32,56,0.08)]",
+                    col.featured ? "border-[rgba(255,160,0,0.22)]" : "border-[rgba(8,32,56,0.08)]",
                     index === rows.length - 1 && "border-transparent",
                   )}
                 >
@@ -137,7 +137,7 @@ export function PlanComparisonTable({ rows }: { rows: PlanComparisonRow[] }) {
                 className={cn(
                   "flex items-center justify-center rounded-full px-3 py-2.5 text-center text-[12px] font-bold transition-colors",
                   col.featured
-                    ? "bg-gold text-white shadow-[0_8px_20px_rgba(245,158,11,0.28)] hover:bg-gold-hover"
+                    ? "bg-gold text-white shadow-[0_8px_20px_rgba(255,160,0,0.28)] hover:bg-gold-hover"
                     : "border border-gold/40 bg-white/40 text-navy hover:bg-cream",
                 )}
               >

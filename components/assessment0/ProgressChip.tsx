@@ -16,7 +16,7 @@ export function ProgressChip({ answered, total }: Props) {
         </p>
         <div className="h-1.5 min-w-0 flex-1 rounded-full bg-slate-200" aria-hidden>
           <div
-            className="h-full rounded-full bg-[#1677E8] transition-[width] duration-200"
+            className="h-full rounded-full bg-[#0A66FF] transition-[width] duration-200"
             style={{ width: `${pct}%` }}
           />
         </div>

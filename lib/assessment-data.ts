@@ -27,8 +27,8 @@ export const MATURITY_BANDS: { min: number; max: number; band: MaturityBand }[] 
 
 export const BAND_COLORS: Record<MaturityBand, string> = {
   Critical: "#DC2626",
-  Reactive: "#D97706",
-  Developing: "#1677E8",
+  Reactive: "#E68900",
+  Developing: "#0A66FF",
   Optimized: "#059669",
 };
 

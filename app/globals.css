@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --cp-primary: #1677e8;
-  --cp-primary-hover: #125fba;
-  --cp-gold: #f59e0b;
-  --cp-gold-hover: #d97706;
+  --cp-primary: #0a66ff;
+  --cp-primary-hover: #0852cc;
+  --cp-gold: #ffa000;
+  --cp-gold-hover: #e68900;
   --cp-gold-light: #fde68a;
   --cp-cream: #fffbeb;
   --cp-navy: #102840;

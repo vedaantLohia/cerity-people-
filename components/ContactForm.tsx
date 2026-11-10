@@ -254,7 +254,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="btn-gradient mt-6 w-full rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md shadow-[rgba(22,119,232,0.18)] transition-all hover:shadow-lg disabled:opacity-60 sm:w-auto sm:min-w-[200px]"
+        className="btn-gradient mt-6 w-full rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md shadow-[rgba(10,102,255,0.18)] transition-all hover:shadow-lg disabled:opacity-60 sm:w-auto sm:min-w-[200px]"
       >
         {submitting ? "Submitting…" : "Request Consultation"}
       </button>

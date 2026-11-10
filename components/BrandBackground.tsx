@@ -18,19 +18,19 @@ export type BrandBackgroundVariant =
   | "solutionsPage"
   | "contactPage";
 
-const BLUE = "#1677E8";
-const GOLD = "#F59E0B";
+const BLUE = "#0A66FF";
+const GOLD = "#FFA000";
 const GOLD_LIGHT = "#FDE68A";
 
 type Corner = "tl" | "tr" | "bl" | "br" | "ml" | "mr";
 type Tone = "blue" | "gold" | "goldLight" | "blueDeep" | "goldDeep";
 
 const toneFill: Record<Tone, string> = {
-  blue: `radial-gradient(circle at 42% 42%, rgba(22,119,232,0.18) 0%, rgba(22,119,232,0.07) 46%, transparent 70%)`,
-  gold: `radial-gradient(circle at 42% 42%, rgba(245,158,11,0.16) 0%, rgba(253,230,138,0.22) 38%, transparent 70%)`,
-  goldLight: `radial-gradient(circle at 42% 42%, rgba(253,230,138,0.42) 0%, rgba(245,158,11,0.10) 48%, transparent 72%)`,
-  blueDeep: `radial-gradient(circle at 42% 42%, rgba(22,119,232,0.58) 0%, rgba(22,119,232,0.22) 48%, transparent 72%)`,
-  goldDeep: `radial-gradient(circle at 42% 42%, rgba(245,158,11,0.42) 0%, rgba(90,70,20,0.38) 42%, transparent 74%)`,
+  blue: `radial-gradient(circle at 42% 42%, rgba(10,102,255,0.27) 0%, rgba(10,102,255,0.11) 46%, transparent 70%)`,
+  gold: `radial-gradient(circle at 42% 42%, rgba(255,160,0,0.24) 0%, rgba(253,230,138,0.33) 38%, transparent 70%)`,
+  goldLight: `radial-gradient(circle at 42% 42%, rgba(253,230,138,0.6) 0%, rgba(255,160,0,0.15) 48%, transparent 72%)`,
+  blueDeep: `radial-gradient(circle at 42% 42%, rgba(10,102,255,0.58) 0%, rgba(10,102,255,0.22) 48%, transparent 72%)`,
+  goldDeep: `radial-gradient(circle at 42% 42%, rgba(255,160,0,0.42) 0%, rgba(90,70,20,0.38) 42%, transparent 74%)`,
 };
 
 function compactCorner(corner: Corner): Corner {
@@ -52,8 +52,8 @@ function BrandGrid({ density = "default" }: { density?: "hero" | "default" | "fa
   const navy = density === "navy";
   const a = navy ? 0.1 : density === "hero" ? 0.05 : density === "faint" ? 0.035 : 0.045;
   const b = navy ? 0.06 : density === "faint" ? 0.018 : 0.025;
-  const lineA = navy ? `rgba(255,255,255,${a})` : `rgba(22,119,232,${a})`;
-  const lineB = navy ? `rgba(22,119,232,${b})` : `rgba(8,32,56,${b})`;
+  const lineA = navy ? `rgba(255,255,255,${a})` : `rgba(10,102,255,${a})`;
+  const lineB = navy ? `rgba(10,102,255,${b})` : `rgba(8,32,56,${b})`;
   return (
     <div
       className="brand-grid absolute inset-0"
@@ -105,12 +105,12 @@ function BrandGlow({
 }) {
   const color =
     tone === "blueDeep"
-      ? "rgba(22,119,232,0.28)"
+      ? "rgba(10,102,255,0.28)"
       : tone === "goldDeep"
-        ? "rgba(245,158,11,0.2)"
+        ? "rgba(255,160,0,0.2)"
         : tone === "blue"
-          ? "rgba(22,119,232,0.12)"
-          : "rgba(245,158,11,0.10)";
+          ? "rgba(10,102,255,0.12)"
+          : "rgba(255,160,0,0.10)";
   return (
     <div
       className={cn(
@@ -140,7 +140,7 @@ function DotMatrix({ corner }: { corner: Corner }) {
       )}
       style={{
         backgroundImage:
-          "radial-gradient(circle, rgba(22,119,232,1) 1px, transparent 1.2px)",
+          "radial-gradient(circle, rgba(10,102,255,1) 1px, transparent 1.2px)",
         backgroundSize: "12px 12px",
       }}
     />
@@ -229,18 +229,18 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "br", tone: "blue", size: "40%", secondary: true },
     ],
     rings: [
-      { cx: 80, cy: 920, r: 430, stroke: BLUE, width: 150, opacity: 0.13 },
-      { cx: 220, cy: 980, r: 340, stroke: GOLD, width: 90, opacity: 0.11 },
-      { cx: 1380, cy: 40, r: 380, stroke: GOLD_LIGHT, width: 110, opacity: 0.28 },
-      { cx: 1320, cy: 120, r: 260, stroke: BLUE, width: 70, opacity: 0.12 },
-      { cx: 1420, cy: 860, r: 360, stroke: GOLD, width: 100, opacity: 0.12 },
-      { cx: 1360, cy: 900, r: 250, stroke: BLUE, width: 80, opacity: 0.14 },
+      { cx: 80, cy: 920, r: 430, stroke: BLUE, width: 150, opacity: 0.2 },
+      { cx: 220, cy: 980, r: 340, stroke: GOLD, width: 90, opacity: 0.17 },
+      { cx: 1380, cy: 40, r: 380, stroke: GOLD_LIGHT, width: 110, opacity: 0.42 },
+      { cx: 1320, cy: 120, r: 260, stroke: BLUE, width: 70, opacity: 0.18 },
+      { cx: 1420, cy: 860, r: 360, stroke: GOLD, width: 100, opacity: 0.18 },
+      { cx: 1360, cy: 900, r: 250, stroke: BLUE, width: 80, opacity: 0.21 },
     ],
     lines: [
       {
         d: "M 980 40 C 1180 180, 1280 420, 1220 680",
         stroke: GOLD,
-        opacity: 0.28,
+        opacity: 0.42,
       },
     ],
     dots: ["bl", "tr"],
@@ -251,7 +251,7 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "tr", tone: "blue", size: "36%", secondary: true },
       { corner: "bl", tone: "goldLight", size: "32%", secondary: true },
     ],
-    rings: [{ cx: 1420, cy: 80, r: 260, stroke: BLUE, width: 70, opacity: 0.08 }],
+    rings: [{ cx: 1420, cy: 80, r: 260, stroke: BLUE, width: 70, opacity: 0.12 }],
   },
   about: {
     grid: "default",
@@ -260,8 +260,8 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "tr", tone: "blue", size: "50%" },
       { corner: "tl", tone: "goldLight", size: "28%", secondary: true },
     ],
-    rings: [{ cx: 1480, cy: 200, r: 340, stroke: BLUE, width: 90, opacity: 0.1 }],
-    lines: [{ d: "M 1100 80 C 1280 220, 1360 400, 1300 560", stroke: GOLD, opacity: 0.18 }],
+    rings: [{ cx: 1480, cy: 200, r: 340, stroke: BLUE, width: 90, opacity: 0.15 }],
+    lines: [{ d: "M 1100 80 C 1280 220, 1360 400, 1300 560", stroke: GOLD, opacity: 0.27 }],
   },
   tech: {
     grid: "default",
@@ -271,8 +271,8 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "br", tone: "blue", size: "34%", secondary: true },
     ],
     rings: [
-      { cx: -40, cy: 860, r: 420, stroke: BLUE, width: 140, opacity: 0.14 },
-      { cx: 1400, cy: 820, r: 240, stroke: BLUE, width: 60, opacity: 0.08 },
+      { cx: -40, cy: 860, r: 420, stroke: BLUE, width: 140, opacity: 0.21 },
+      { cx: 1400, cy: 820, r: 240, stroke: BLUE, width: 60, opacity: 0.12 },
     ],
     dots: ["br"],
   },
@@ -313,10 +313,10 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "bl", tone: "blue", size: "44%" },
     ],
     rings: [
-      { cx: 1400, cy: 60, r: 320, stroke: GOLD, width: 80, opacity: 0.12 },
-      { cx: 80, cy: 880, r: 300, stroke: BLUE, width: 90, opacity: 0.11 },
+      { cx: 1400, cy: 60, r: 320, stroke: GOLD, width: 80, opacity: 0.18 },
+      { cx: 80, cy: 880, r: 300, stroke: BLUE, width: 90, opacity: 0.17 },
     ],
-    lines: [{ d: "M 1080 60 C 1240 200, 1320 380, 1260 540", stroke: GOLD, opacity: 0.22 }],
+    lines: [{ d: "M 1080 60 C 1240 200, 1320 380, 1260 540", stroke: GOLD, opacity: 0.33 }],
   },
   people: {
     grid: "faint",
@@ -326,7 +326,7 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "tr", tone: "goldLight", size: "54%" },
       { corner: "bl", tone: "blue", size: "36%", secondary: true },
     ],
-    rings: [{ cx: 1380, cy: 40, r: 340, stroke: GOLD_LIGHT, width: 100, opacity: 0.32 }],
+    rings: [{ cx: 1380, cy: 40, r: 340, stroke: GOLD_LIGHT, width: 100, opacity: 0.48 }],
   },
   solutions: {
     grid: "default",
@@ -340,8 +340,8 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "br", tone: "blue", size: "32%", secondary: true },
     ],
     rings: [
-      { cx: 80, cy: -40, r: 300, stroke: BLUE, width: 80, opacity: 0.1 },
-      { cx: 1400, cy: 900, r: 340, stroke: GOLD, width: 90, opacity: 0.11 },
+      { cx: 80, cy: -40, r: 300, stroke: BLUE, width: 80, opacity: 0.15 },
+      { cx: 1400, cy: 900, r: 340, stroke: GOLD, width: 90, opacity: 0.17 },
     ],
   },
   solutionsPage: {
@@ -366,14 +366,14 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
   },
   trust: {
     grid: "faint",
-    wash: "linear-gradient(180deg, rgba(22,119,232,0.03) 0%, #FFFFFF 100%)",
+    wash: "linear-gradient(180deg, rgba(10,102,255,0.03) 0%, #FFFFFF 100%)",
     arcs: [{ corner: "tl", tone: "blue", size: "28%", secondary: true }],
   },
   testimonials: {
     grid: "faint",
     glows: [{ corner: "tr", tone: "blue", secondary: true }],
     arcs: [{ corner: "tr", tone: "goldLight", size: "30%", secondary: true }],
-    lines: [{ d: "M 1180 80 C 1300 180, 1340 300, 1280 400", stroke: GOLD, opacity: 0.16 }],
+    lines: [{ d: "M 1180 80 C 1300 180, 1340 300, 1280 400", stroke: GOLD, opacity: 0.24 }],
   },
   cta: {
     grid: "faint",
@@ -382,10 +382,10 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "tr", tone: "goldLight", size: "42%" },
     ],
     rings: [
-      { cx: -20, cy: 200, r: 280, stroke: BLUE, width: 90, opacity: 0.28 },
-      { cx: 1460, cy: 40, r: 260, stroke: GOLD, width: 70, opacity: 0.22 },
+      { cx: -20, cy: 200, r: 280, stroke: BLUE, width: 90, opacity: 0.42 },
+      { cx: 1460, cy: 40, r: 260, stroke: GOLD, width: 70, opacity: 0.33 },
     ],
-    lines: [{ d: "M 900 40 C 1100 160, 1240 320, 1180 520", stroke: GOLD_LIGHT, opacity: 0.35 }],
+    lines: [{ d: "M 900 40 C 1100 160, 1240 320, 1180 520", stroke: GOLD_LIGHT, opacity: 0.5 }],
   },
   footer: {
     grid: "faint",
@@ -393,8 +393,8 @@ const motifs: Record<BrandBackgroundVariant, Motifs> = {
       { corner: "br", tone: "blue", size: "40%" },
       { corner: "bl", tone: "gold", size: "28%", secondary: true },
     ],
-    rings: [{ cx: 1400, cy: 860, r: 280, stroke: BLUE, width: 70, opacity: 0.1 }],
-    lines: [{ d: "M 200 820 C 480 760, 820 840, 1100 780", stroke: GOLD, opacity: 0.2 }],
+    rings: [{ cx: 1400, cy: 860, r: 280, stroke: BLUE, width: 70, opacity: 0.15 }],
+    lines: [{ d: "M 200 820 C 480 760, 820 840, 1100 780", stroke: GOLD, opacity: 0.3 }],
   },
 };
 

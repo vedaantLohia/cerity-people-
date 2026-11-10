@@ -79,7 +79,7 @@ export function AssessmentCharts({ result }: { result: AssessmentResult }) {
               <PolarGrid />
               <PolarAngleAxis dataKey="subject" tick={{ fontSize: 10 }} />
               <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
-              <Radar dataKey="score" stroke="#1677E8" fill="#1677E8" fillOpacity={0.35} />
+              <Radar dataKey="score" stroke="#0A66FF" fill="#0A66FF" fillOpacity={0.35} />
             </RadarChart>
           </ResponsiveContainer>
         </div>

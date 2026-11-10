@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { HomePageClass } from "@/components/HomePageClass";
 import { JsonLd } from "@/components/JsonLd";
 import { PlanComparisonTable } from "@/components/PlanComparisonTable";
+import { PackageBuilder } from "@/components/PackageBuilder";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import Link from "next/link";
 
@@ -286,6 +287,10 @@ export default function SolutionsPage() {
       </div>
 
 
+      <PackageBuilder />
+
+      <div className="mt-20" />
+
       {/* =====================================================
           PLAN GRID
       ===================================================== */}
@@ -296,8 +301,8 @@ export default function SolutionsPage() {
             key={plan.name}
             className={`relative flex flex-col overflow-hidden rounded-[28px] ${
               plan.featured
-                ? "bg-gradient-to-br from-navy via-navy-deep to-primary text-white shadow-[0_25px_70px_rgba(8,32,56,0.20)] lg:-translate-y-5"
-                : "border border-[rgba(8,32,56,0.08)] bg-white text-navy shadow-[0_8px_30px_rgba(8,32,56,0.08)]"
+                ? "border border-gold/35 bg-cream/55 text-navy backdrop-blur-xl shadow-[0_22px_50px_rgba(255,160,0,0.14)] lg:-translate-y-5"
+                : "border border-white/60 bg-white/50 text-navy backdrop-blur-xl shadow-[0_12px_36px_rgba(8,32,56,0.06)]"
             }`}
           >
 
@@ -319,7 +324,7 @@ export default function SolutionsPage() {
               <p
                 className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
                   plan.featured
-                    ? "text-gold-light"
+                    ? "text-gold"
                     : "text-gold"
                 }`}
               >
@@ -333,7 +338,7 @@ export default function SolutionsPage() {
               <h3
                 className={`mt-4 text-3xl font-bold tracking-[-0.04em] ${
                   plan.featured
-                    ? "text-white"
+                    ? "text-navy"
                     : "text-navy"
                 }`}
               >
@@ -347,7 +352,7 @@ export default function SolutionsPage() {
               <p
                 className={`mt-4 min-h-[84px] leading-6 ${
                   plan.featured
-                    ? "text-gold-light"
+                    ? "text-[rgba(8,32,56,0.70)]"
                     : "text-[rgba(8,32,56,0.70)]"
                 }`}
               >
@@ -363,7 +368,7 @@ export default function SolutionsPage() {
                 <p
                   className={`mb-4 text-[15px] font-bold uppercase tracking-[0.18em] ${
                     plan.featured
-                      ? "text-gold-light"
+                      ? "text-[rgba(8,32,56,0.70)]"
                       : "text-[rgba(8,32,56,0.70)]"
                   }`}
                 >
@@ -380,7 +385,7 @@ export default function SolutionsPage() {
                       <span
                         className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[17px] font-bold ${
                           plan.featured
-                            ? "bg-primary text-white"
+                            ? "bg-gold text-white"
                             : "bg-cream text-gold"
                         }`}
                       >
@@ -390,7 +395,7 @@ export default function SolutionsPage() {
                       <span
                         className={`leading-5 ${
                           plan.featured
-                            ? "text-cream"
+                            ? "text-[rgba(8,32,56,0.70)]"
                             : "text-[rgba(8,32,56,0.70)]"
                         }`}
                       >
@@ -411,7 +416,7 @@ export default function SolutionsPage() {
                 className={`group mt-9 flex items-center justify-center gap-3 rounded-full px-5 py-3.5 text-sm font-bold transition-all duration-300 ${
                   plan.featured
                     ? "bg-accent text-white hover:bg-gold-hover"
-                    : "border-2 border-accent bg-white text-navy hover:bg-cream"
+                    : "border-2 border-accent bg-white/40 text-navy hover:bg-cream"
                 }`}
               >
                 Talk to an Expert
@@ -545,7 +550,7 @@ export default function SolutionsPage() {
 
       <Link
         href="/contact"
-        className="btn-gradient group inline-flex w-fit items-center gap-4 rounded-full px-6 py-3.5 text-sm font-bold text-white shadow-md shadow-[rgba(22,119,232,0.18)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(245,158,11,0.22)]"
+        className="btn-gradient group inline-flex w-fit items-center gap-4 rounded-full px-6 py-3.5 text-sm font-bold text-white shadow-md shadow-[rgba(10,102,255,0.18)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(255,160,0,0.22)]"
       >
         Talk to an Expert
 

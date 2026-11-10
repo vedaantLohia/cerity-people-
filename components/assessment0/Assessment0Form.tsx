@@ -195,7 +195,7 @@ export function Assessment0Form() {
           <button
             type="submit"
             disabled={submitting}
-            className="mt-8 rounded-full bg-[#1677E8] px-6 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
+            className="mt-8 rounded-full bg-[#0A66FF] px-6 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
           >
             {submitting ? "Calculating…" : "See my HR score"}
           </button>

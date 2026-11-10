@@ -10,7 +10,7 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.ceritypeople.com",
   locale: "en_US",
   footer: {
-    tagline: "Digitally Enabled. Expertly Managed.",
+    tagline: "Expertly Managed. Digitally Enabled.",
     description:
       "Practical HR support and technology-driven solutions to help businesses manage people, streamline HR processes, and support growth.",
   },
@@ -27,8 +27,8 @@ export const siteConfig = {
     youtube: "https://youtube.com/@ceritypeople",
   },
   colors: {
-    primary: "#1677E8",
-    gold: "#F59E0B",
+    primary: "#0A66FF",
+    gold: "#FFA000",
     goldLight: "#FDE68A",
     cream: "#FFFBEB",
     navy: "#102840",

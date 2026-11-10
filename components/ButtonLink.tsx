@@ -5,11 +5,11 @@ type Variant = "primary" | "accent" | "secondary" | "outline" | "ghost";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-gradient-to-r from-primary to-accent text-white shadow-md shadow-[rgba(22,119,232,0.18)] hover:from-primary-hover hover:to-gold-hover hover:shadow-lg focus-visible:ring-primary",
+    "bg-gradient-to-r from-primary to-accent text-white shadow-md shadow-[rgba(10,102,255,0.18)] hover:from-primary-hover hover:to-gold-hover hover:shadow-lg focus-visible:ring-primary",
   accent:
-    "bg-accent text-white shadow-md shadow-[rgba(245,158,11,0.25)] hover:bg-gold-hover hover:shadow-lg focus-visible:ring-accent",
+    "bg-accent text-white shadow-md shadow-[rgba(255,160,0,0.25)] hover:bg-gold-hover hover:shadow-lg focus-visible:ring-accent",
   secondary:
-    "bg-accent text-white shadow-md shadow-[rgba(245,158,11,0.25)] hover:bg-gold-hover hover:shadow-lg focus-visible:ring-accent",
+    "bg-accent text-white shadow-md shadow-[rgba(255,160,0,0.25)] hover:bg-gold-hover hover:shadow-lg focus-visible:ring-accent",
   outline:
     "border-2 border-accent bg-white/90 text-navy shadow-sm hover:bg-cream hover:shadow-md focus-visible:ring-accent",
   ghost: "text-navy hover:bg-cream hover:text-navy",

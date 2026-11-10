@@ -190,10 +190,10 @@ export function EmployeeLifecycle() {
           <svg className="pointer-events-none absolute inset-[18%] h-[64%] w-[64%]" viewBox="0 0 400 400" aria-hidden>
             <defs>
               <linearGradient id={`${uid}-ring`} x1="0.15" y1="0" x2="0.85" y2="1">
-                <stop offset="0%" stopColor="#1677E8" />
-                <stop offset="42%" stopColor="#1677E8" />
-                <stop offset="72%" stopColor="#F59E0B" />
-                <stop offset="100%" stopColor="#F59E0B" />
+                <stop offset="0%" stopColor="#0A66FF" />
+                <stop offset="42%" stopColor="#0A66FF" />
+                <stop offset="72%" stopColor="#FFA000" />
+                <stop offset="100%" stopColor="#FFA000" />
               </linearGradient>
             </defs>
             <circle
@@ -210,14 +210,14 @@ export function EmployeeLifecycle() {
               cy="200"
               r="148"
               fill="none"
-              stroke="#1677E8"
+              stroke="#0A66FF"
               strokeWidth="1.25"
               strokeDasharray="2.5 10"
               opacity="0.28"
             />
           </svg>
 
-          <div className="absolute left-1/2 top-1/2 z-10 flex h-[138px] w-[138px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[rgba(22,119,232,0.12)] bg-white shadow-[0_10px_40px_rgba(22,119,232,0.10)] sm:h-[156px] sm:w-[156px]">
+          <div className="absolute left-1/2 top-1/2 z-10 flex h-[138px] w-[138px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[rgba(10,102,255,0.12)] bg-white shadow-[0_10px_40px_rgba(10,102,255,0.10)] sm:h-[156px] sm:w-[156px]">
             <Users className="h-9 w-9 text-primary sm:h-10 sm:w-10" strokeWidth={1.6} />
             <p className="mt-2 text-sm font-bold tracking-tight text-navy sm:text-base">Employee</p>
             <span className="mt-1 h-[3px] w-8 rounded-full bg-gold" aria-hidden />
@@ -241,7 +241,7 @@ export function EmployeeLifecycle() {
                   className={cn(
                     "absolute z-20 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border shadow-[0_8px_24px_rgba(8,32,56,0.08)] transition-all duration-300 sm:h-[52px] sm:w-[52px]",
                     selected
-                      ? "scale-110 border-primary bg-primary text-white shadow-[0_10px_28px_rgba(22,119,232,0.35)]"
+                      ? "scale-110 border-primary bg-primary text-white shadow-[0_10px_28px_rgba(10,102,255,0.35)]"
                       : item.tone === "gold"
                         ? "border-gold/25 bg-white text-gold hover:border-gold/50"
                         : "border-primary/20 bg-white text-primary hover:border-primary/50",
@@ -279,7 +279,7 @@ export function EmployeeLifecycle() {
 
         <div className="relative overflow-hidden rounded-[28px] border border-[rgba(8,32,56,0.06)] bg-white p-6 shadow-[0_24px_60px_rgba(8,32,56,0.10)] sm:p-8">
           <div
-            className="pointer-events-none absolute -right-8 -top-10 h-40 w-40 rounded-full bg-[rgba(22,119,232,0.10)]"
+            className="pointer-events-none absolute -right-8 -top-10 h-40 w-40 rounded-full bg-[rgba(10,102,255,0.10)]"
             aria-hidden
           />
           <div
@@ -305,9 +305,9 @@ export function EmployeeLifecycle() {
               </div>
 
               <div className="relative hidden h-[148px] w-[148px] shrink-0 sm:block">
-                <div className="absolute -right-3 -top-4 h-36 w-36 rounded-full bg-[rgba(22,119,232,0.16)]" />
+                <div className="absolute -right-3 -top-4 h-36 w-36 rounded-full bg-[rgba(10,102,255,0.16)]" />
                 <div className="absolute -right-1 -top-1 h-[7.5rem] w-[7.5rem] rounded-full border-[12px] border-[#FDE68A]" />
-                <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-gradient-to-br from-[#E8F2FF] to-white shadow-[0_12px_30px_rgba(22,119,232,0.12)]">
+                <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-gradient-to-br from-[#E8F2FF] to-white shadow-[0_12px_30px_rgba(10,102,255,0.12)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/lifecycle-portrait.jpg"
@@ -344,7 +344,7 @@ export function EmployeeLifecycle() {
             <div className="mt-7 flex items-center justify-between gap-3">
               <Link
                 href={stage.href}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_10px_24px_rgba(22,119,232,0.28)] transition-colors hover:bg-primary-hover"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_10px_24px_rgba(10,102,255,0.28)] transition-colors hover:bg-primary-hover"
               >
                 {stage.cta}
                 <span aria-hidden>→</span>

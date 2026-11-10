@@ -17,7 +17,7 @@ export function Intro({ onStart }: Props) {
       <button
         type="button"
         onClick={onStart}
-        className="mt-8 inline-flex rounded-full bg-[#1677E8] px-8 py-3 text-sm font-semibold text-white shadow-md shadow-[rgba(22,119,232,0.18)] transition hover:bg-[#1266c7]"
+        className="mt-8 inline-flex rounded-full bg-[#0A66FF] px-8 py-3 text-sm font-semibold text-white shadow-md shadow-[rgba(10,102,255,0.18)] transition hover:bg-[#1266c7]"
       >
         Start assessment
       </button>

@@ -91,7 +91,7 @@ export function QuestionStep({
         <button
           type="button"
           onClick={onNext}
-          className="rounded-full bg-[#1677E8] px-6 py-2.5 text-sm font-semibold text-white"
+          className="rounded-full bg-[#0A66FF] px-6 py-2.5 text-sm font-semibold text-white"
         >
           {nextLabel}
         </button>

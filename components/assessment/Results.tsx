@@ -74,7 +74,7 @@ export function Results({
                 type="button"
                 onClick={onRetrySend}
                 disabled={retrying}
-                className="mt-3 rounded-full bg-[#1677E8] px-5 py-2 text-sm font-semibold text-white disabled:opacity-60"
+                className="mt-3 rounded-full bg-[#0A66FF] px-5 py-2 text-sm font-semibold text-white disabled:opacity-60"
               >
                 {retrying ? "Retrying…" : "Retry"}
               </button>
@@ -86,7 +86,7 @@ export function Results({
             type="button"
             onClick={downloadPdf}
             disabled={downloading}
-            className="rounded-full bg-[#1677E8] px-6 py-3 text-sm font-semibold text-white disabled:opacity-60"
+            className="rounded-full bg-[#0A66FF] px-6 py-3 text-sm font-semibold text-white disabled:opacity-60"
           >
             {downloading ? "Preparing PDF…" : "Download PDF"}
           </button>

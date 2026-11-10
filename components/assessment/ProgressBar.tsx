@@ -22,7 +22,7 @@ export function ProgressBar({ current, total }: Props) {
         aria-label={`Step ${current} of ${total}`}
       >
         <div
-          className="h-full rounded-full bg-[#1677E8] transition-all duration-300"
+          className="h-full rounded-full bg-[#0A66FF] transition-all duration-300"
           style={{ width: `${pct}%` }}
         />
       </div>
