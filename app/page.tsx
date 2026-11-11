@@ -20,7 +20,7 @@ import { buildMetadata } from "@/lib/seo";
 const SHOW_HOME_TESTIMONIALS = false;
 
 export const metadata = buildMetadata({
-  title: "Hire, Onboard, Pay & Manage Your People",
+  title: "Onboard, Pay, Comply & Grow Your People, All in One Place",
   description:
     "Cerity People brings HR, Technology and HR expert support together, so your team spends less time on administration and more time on growth. From the first job description to the final settlement, we keep your people processes accurate, compliant and organized.",
   path: "/",
@@ -50,7 +50,7 @@ export default function HomePage() {
         <div className="container relative w-full">
           <div className="mx-auto max-w-[1100px] text-center">
             <h1 className="mx-auto text-balance text-4xl font-bold tracking-tight sm:text-5xl lg:text-[3.4rem] lg:leading-[1.15]">
-              <span className="block text-navy">Hire, Onboard, Pay &amp; Manage Your People,</span>
+              <span className="block text-navy">Onboard, Pay, Comply &amp; Grow Your People,</span>
               <span className="block text-accent">All in One Place</span>
             </h1>
 
