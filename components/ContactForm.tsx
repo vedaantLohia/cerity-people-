@@ -38,9 +38,20 @@ const fieldClass =
 
 export function ContactForm() {
   const searchParams = useSearchParams();
-  const [values, setValues] = useState<FormState>(() =>
-    emptyForm(searchParams.get("email") ?? "", searchParams.get("company") ?? ""),
-  );
+  const [values, setValues] = useState<FormState>(() => {
+    const base = emptyForm(searchParams.get("email") ?? "", searchParams.get("company") ?? "");
+    const plan = searchParams.get("plan")?.slice(0, 40);
+    if (plan) {
+      const team = searchParams.get("team")?.slice(0, 6);
+      const services = searchParams.get("services")?.slice(0, 200);
+      base.message =
+        `I'm interested in the ${plan} package` +
+        (team ? ` for a team of about ${team} people` : "") +
+        (services ? `, covering: ${services}` : "") +
+        ".";
+    }
+    return base;
+  });
   const [errors, setErrors] = useState<ClientErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);

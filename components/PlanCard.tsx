@@ -8,7 +8,24 @@ export type PlanDetail = {
   featured: boolean;
 };
 
-export function PlanCard({ plan, className = "" }: { plan: PlanDetail; className?: string }) {
+export function PlanCard({
+  plan,
+  className = "",
+  badge,
+  href = "/contact",
+  onSelect,
+  selectLabel = "See this plan instead",
+}: {
+  plan: PlanDetail;
+  className?: string;
+  /** Small pill shown at the top of the card, e.g. "Best match for your picks". */
+  badge?: string;
+  /** Where the "Talk to an Expert" button goes. */
+  href?: string;
+  /** If set, shows a secondary button that calls this (e.g. switch the calculator to this plan). */
+  onSelect?: () => void;
+  selectLabel?: string;
+}) {
   return (
     <div
       className={`relative flex flex-col overflow-hidden rounded-[28px] ${
@@ -24,6 +41,16 @@ export function PlanCard({ plan, className = "" }: { plan: PlanDetail; className
       )}
 
       <div className="flex flex-1 flex-col p-7 sm:p-8">
+        {badge && (
+          <p
+            className={`mb-4 inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold ${
+              plan.featured ? "bg-white/15 text-gold-light" : "bg-cream text-gold"
+            }`}
+          >
+            <span aria-hidden="true">★</span>
+            {badge}
+          </p>
+        )}
         <p
           className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
             plan.featured ? "text-gold-light" : "text-gold"
@@ -79,9 +106,23 @@ export function PlanCard({ plan, className = "" }: { plan: PlanDetail; className
           </ul>
         </div>
 
+        {onSelect && (
+          <button
+            type="button"
+            onClick={onSelect}
+            className={`mt-9 rounded-full px-5 py-3 text-sm font-bold transition-colors ${
+              plan.featured
+                ? "border border-white/30 text-white hover:bg-white/10"
+                : "border border-[rgba(8,32,56,0.15)] text-navy hover:bg-cream"
+            }`}
+          >
+            {selectLabel}
+          </button>
+        )}
+
         <Link
-          href="/contact"
-          className={`group mt-9 flex items-center justify-center gap-3 rounded-full px-5 py-3.5 text-sm font-bold transition-all duration-300 ${
+          href={href}
+          className={`group ${onSelect ? "mt-3" : "mt-9"} flex items-center justify-center gap-3 rounded-full px-5 py-3.5 text-sm font-bold transition-all duration-300 ${
             plan.featured
               ? "bg-accent text-white hover:bg-gold-hover"
               : "border-2 border-accent bg-white text-navy hover:bg-cream"

@@ -90,7 +90,7 @@ function useTween(target: number, ms = 450) {
 export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
   const { minEmployees, maxEmployees, defaultEmployees, plans } = pricingConfig;
   const [employees, setEmployees] = useState(defaultEmployees);
-  const [picked, setPicked] = useState<string[]>(["core"]);
+  const [picked, setPicked] = useState<string[]>([]);
   const [term, setTerm] = useState<BillingTerm>("annual");
 
   const tier = useMemo(
@@ -101,10 +101,43 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
       ),
     [picked],
   );
+  const hasPick = picked.length > 0;
   const plan = plans[tier];
-  const quote = buildQuote(plan, employees, term);
+  const quote = hasPick ? buildQuote(plan, employees, term) : null;
   const shownMonthly = useTween(quote?.monthly ?? 0);
   const shownTotal = useTween(quote?.total ?? 0);
+
+  const asideRef = useRef<HTMLElement>(null);
+
+  const pickedTitles = MODULES.filter((m) => picked.includes(m.id)).map((m) => m.title);
+  const drivers = MODULES.filter((m) => picked.includes(m.id) && m.tier === tier).map(
+    (m) => m.title,
+  );
+  const joinList = (items: string[]) =>
+    items.length <= 1
+      ? (items[0] ?? "")
+      : `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+  const why =
+    picked.length === 0
+      ? "Pick a service to see your plan."
+      : tier === 0
+        ? `${plan.name} covers everything you picked.`
+        : `${plan.name}, because you picked ${joinList(drivers)}.`;
+
+  const contactHref = (planName: string) => {
+    const q = new URLSearchParams({ plan: planName, team: String(employees) });
+    if (pickedTitles.length) q.set("services", pickedTitles.join(", "));
+    return `/contact?${q.toString()}`;
+  };
+
+  const switchTo = (t: number) => {
+    setPicked(MODULES.filter((m) => m.tier <= t).map((m) => m.id));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    asideRef.current?.scrollIntoView({
+      behavior: reduce ? "auto" : "smooth",
+      block: "start",
+    });
+  };
 
   const toggle = (id: string) =>
     setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
@@ -189,6 +222,9 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
           <h3 className="mt-2 text-2xl font-bold tracking-tight text-navy">
             What should we take off your plate?
           </h3>
+          <p className="mt-2 text-sm text-[rgba(8,32,56,0.65)]">
+            Tick everything you need. Your plan updates as you go.
+          </p>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {MODULES.map((m) => {
@@ -248,6 +284,18 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
                       <span className="mt-1 block text-[13px] leading-5 text-[rgba(8,32,56,0.65)]">
                         {m.blurb}
                       </span>
+                      <span
+                        className={`mt-3 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
+                          on && m.tier === tier && tier > 0
+                            ? "bg-gold text-white"
+                            : m.tier === 0
+                              ? "bg-[rgba(8,32,56,0.06)] text-[rgba(8,32,56,0.6)]"
+                              : "bg-cream text-gold"
+                        }`}
+                      >
+                        From {plans[m.tier].name}
+                        {on && m.tier === tier && tier > 0 ? " · sets your plan" : ""}
+                      </span>
                     </span>
                   </span>
                 </button>
@@ -258,7 +306,7 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
       </div>
 
       {/* ================= RIGHT: live package ================= */}
-      <aside className="space-y-5">
+      <aside ref={asideRef} className="scroll-mt-28 space-y-5">
         <div className="overflow-hidden rounded-[28px] border border-gold/35 bg-cream/60 shadow-[0_22px_50px_rgba(255,160,0,0.16)] backdrop-blur-xl">
           <div className="bg-accent px-6 py-2.5 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-white">
             Your package
@@ -269,14 +317,14 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
             <div className="relative grid grid-cols-3 rounded-full border border-[rgba(8,32,56,0.08)] bg-white/60 p-1 text-center text-xs font-bold">
               <span
                 aria-hidden="true"
-                className="absolute inset-y-1 w-[calc((100%-0.5rem)/3)] rounded-full bg-gold shadow-[0_6px_16px_rgba(255,160,0,0.35)] transition-transform duration-500 ease-[cubic-bezier(.34,1.56,.64,1)]"
+                className={`absolute inset-y-1 w-[calc((100%-0.5rem)/3)] rounded-full bg-gold shadow-[0_6px_16px_rgba(255,160,0,0.35)] transition-all duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] ${hasPick ? "opacity-100" : "opacity-0"}`}
                 style={{ transform: `translateX(${tier * 100}%)`, left: "0.25rem" }}
               />
               {plans.map((p, i) => (
                 <span
                   key={p.name}
                   className={`relative z-10 py-2 transition-colors duration-300 ${
-                    i === tier ? "text-white" : "text-[rgba(8,32,56,0.6)]"
+                    hasPick && i === tier ? "text-white" : "text-[rgba(8,32,56,0.6)]"
                   }`}
                 >
                   {p.name}
@@ -285,6 +333,8 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
             </div>
 
             {/* plan name + tagline cross-fade */}
+            {hasPick ? (
+            <>
             <div className="relative mt-6 h-[74px]" aria-live="polite">
               {plans.map((p, i) => (
                 <div
@@ -304,6 +354,21 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
                 </div>
               ))}
             </div>
+
+            <p className="mt-1 text-sm font-bold text-navy" aria-live="polite">
+              {why}
+            </p>
+            </>
+            ) : (
+              <div className="mt-6">
+                <h3 className="text-3xl font-bold tracking-[-0.04em] text-[rgba(8,32,56,0.35)]">
+                  No package yet
+                </h3>
+                <p className="mt-2 text-[rgba(8,32,56,0.65)]">
+                  Pick the services you need and your package appears here.
+                </p>
+              </div>
+            )}
 
             {/* price */}
             {quote && (
@@ -366,10 +431,10 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
             </div>
 
             <Link
-              href="/contact"
+              href={hasPick ? contactHref(plan.name) : "/contact"}
               className="group mt-7 flex items-center justify-center gap-3 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-white shadow-[0_8px_20px_rgba(255,160,0,0.28)] transition-colors hover:bg-gold-hover"
             >
-              Talk to an Expert about {plan.name}
+              {hasPick ? `Talk to an Expert about ${plan.name}` : "Talk to an Expert"}
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
@@ -377,28 +442,91 @@ export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
           </div>
         </div>
         {/* the matching plan, moved up beside the package summary */}
-        <div key={tier} className="animate-fade-in-up">
-          <PlanCard plan={planDetails[tier]} />
-        </div>
+        {hasPick && (
+          <div key={tier} className="animate-fade-in-up">
+            <PlanCard
+              plan={planDetails[tier]}
+              badge="Best match for your picks"
+              href={contactHref(plan.name)}
+            />
+          </div>
+        )}
       </aside>
     </div>
 
+    {/* ================= all packages (nothing picked yet) ================= */}
+    {!hasPick && (
+      <div className="mt-16">
+        <div className="mx-auto max-w-xl text-center">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
+            Our packages
+          </p>
+          <p className="mt-3 text-[rgba(8,32,56,0.70)]">
+            Pick your services above and the package that fits comes up beside your
+            summary. Or choose one here.
+          </p>
+        </div>
+        <div className="mt-8 grid items-stretch gap-5 lg:grid-cols-3 lg:gap-6">
+          {planDetails.map((p, i) => (
+            <PlanCard
+              key={p.name}
+              plan={p}
+              className="h-full"
+              href={contactHref(p.name)}
+              onSelect={() => switchTo(i)}
+              selectLabel="Choose this package"
+            />
+          ))}
+        </div>
+      </div>
+    )}
+
     {/* ================= other packages ================= */}
-    <div className="mt-16 text-center">
-      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
-        Other packages available
-      </p>
-      <p className="mx-auto mt-3 max-w-xl text-[rgba(8,32,56,0.70)]">
-        Not quite the right fit? Here are the other packages we offer.
-      </p>
+    {hasPick && (
+    <div className="mt-16 grid items-stretch gap-5 lg:grid-cols-[1fr_0.6fr_1fr] lg:gap-6">
+      {(() => {
+        const others = planDetails
+          .map((p, i) => ({ p, i }))
+          .filter((x) => x.i !== tier);
+        return (
+          <>
+            <div className="order-2 lg:order-none">
+              <PlanCard
+                plan={others[0].p}
+                className="h-full"
+                href={contactHref(others[0].p.name)}
+                onSelect={() => switchTo(others[0].i)}
+              />
+            </div>
+            <div className="order-1 flex flex-col items-center justify-center px-2 py-4 text-center lg:order-none lg:py-0">
+              <span
+                aria-hidden="true"
+                className="mb-5 hidden h-16 w-px bg-gradient-to-b from-transparent to-gold lg:block"
+              />
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
+                Other packages available
+              </p>
+              <p className="mt-3 max-w-[16rem] text-[rgba(8,32,56,0.70)]">
+                Not quite the right fit? Here are the other packages we offer.
+              </p>
+              <span
+                aria-hidden="true"
+                className="mt-5 hidden h-16 w-px bg-gradient-to-t from-transparent to-gold lg:block"
+              />
+            </div>
+            <div className="order-3 lg:order-none">
+              <PlanCard
+                plan={others[1].p}
+                className="h-full"
+                href={contactHref(others[1].p.name)}
+                onSelect={() => switchTo(others[1].i)}
+              />
+            </div>
+          </>
+        );
+      })()}
     </div>
-    <div className="mx-auto mt-8 grid max-w-4xl items-stretch gap-5 md:grid-cols-2">
-      {planDetails
-        .filter((_, i) => i !== tier)
-        .map((p) => (
-          <PlanCard key={p.name} plan={p} />
-        ))}
-    </div>
+    )}
     </>
   );
 }
