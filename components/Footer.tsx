@@ -130,6 +130,14 @@ export function Footer() {
           <div className={cn("text-sm", isContact ? "text-white/80" : "text-slate-600")}>
             <p className={cn("font-medium", isContact ? "text-white" : "text-navy")}>Contact</p>
             <p className="mt-2 max-w-md">{siteConfig.contact.address}</p>
+            <p className="mt-2">
+              <a
+                href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+                className={isContact ? "hover:text-gold-light" : "hover:text-navy"}
+              >
+                {siteConfig.contact.phone}
+              </a>
+            </p>
           </div>
           <div
             className={cn(
