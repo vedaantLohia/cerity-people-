@@ -47,13 +47,14 @@ export default function ConsultingPage() {
               title="Simplified HR Solutions"
               description="Engagements tailored for HR leaders, founders, finance teams, and growing organizations."
             />
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 flex flex-wrap justify-center gap-6">
               {consultingServicesDetailed.map((service) => (
-                <ServiceCard
+                <div
                   key={service.title}
-                  title={service.title}
-                  description={service.description}
-                />
+                  className="flex w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] [&>*]:w-full"
+                >
+                  <ServiceCard title={service.title} description={service.description} />
+                </div>
               ))}
             </div>
           </div>
