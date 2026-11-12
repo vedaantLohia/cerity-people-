@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 const emptySubscribe = () => () => {};
 
+const INTRO_SEEN_KEY = "cerity-intro-seen";
 const INTRO_MS = 1900;
 const NAV_INTRO_MS = 850;
 const MORPH_MS = 1050;
@@ -50,6 +51,9 @@ export function LogoPageTransition({
   };
 
   const finish = () => {
+    try {
+      window.sessionStorage.setItem(INTRO_SEEN_KEY, "1");
+    } catch {}
     setVisible(false);
     setPhase("done");
     onTransitioning(false);
@@ -141,6 +145,20 @@ export function LogoPageTransition({
     if (!isInitial && prevPath.current === pathname) return;
 
     prevPath.current = pathname;
+
+    // Play the intro only once per visit (first page load in this tab).
+    // Later page changes and reloads show the header logo immediately.
+    let alreadyPlayed = false;
+    try {
+      alreadyPlayed = window.sessionStorage.getItem(INTRO_SEEN_KEY) === "1";
+    } catch {}
+    if (!isInitial || alreadyPlayed) {
+      onTransitioning(false);
+      setVisible(false);
+      document.body.style.overflow = "";
+      return;
+    }
+
     runSequence(isInitial);
 
     return clearTimers;
