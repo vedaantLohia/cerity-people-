@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { PlanCard, type PlanDetail } from "@/components/PlanCard";
 import {
   buildQuote,
   formatMoney,
@@ -86,7 +87,7 @@ function useTween(target: number, ms = 450) {
   return value;
 }
 
-export function PackageBuilder() {
+export function PackageBuilder({ planDetails }: { planDetails: PlanDetail[] }) {
   const { minEmployees, maxEmployees, defaultEmployees, plans } = pricingConfig;
   const [employees, setEmployees] = useState(defaultEmployees);
   const [picked, setPicked] = useState<string[]>(["core"]);
@@ -119,6 +120,7 @@ export function PackageBuilder() {
   };
 
   return (
+    <>
     <div className="mt-14 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 md:mt-20">
       {/* ================= LEFT: choices ================= */}
       <div className="space-y-6">
@@ -256,7 +258,7 @@ export function PackageBuilder() {
       </div>
 
       {/* ================= RIGHT: live package ================= */}
-      <aside className="lg:sticky lg:top-28 lg:self-start">
+      <aside className="space-y-5">
         <div className="overflow-hidden rounded-[28px] border border-gold/35 bg-cream/60 shadow-[0_22px_50px_rgba(255,160,0,0.16)] backdrop-blur-xl">
           <div className="bg-accent px-6 py-2.5 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-white">
             Your package
@@ -374,7 +376,29 @@ export function PackageBuilder() {
             </Link>
           </div>
         </div>
+        {/* the matching plan, moved up beside the package summary */}
+        <div key={tier} className="animate-fade-in-up">
+          <PlanCard plan={planDetails[tier]} />
+        </div>
       </aside>
     </div>
+
+    {/* ================= other packages ================= */}
+    <div className="mt-16 text-center">
+      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
+        Other packages available
+      </p>
+      <p className="mx-auto mt-3 max-w-xl text-[rgba(8,32,56,0.70)]">
+        Not quite the right fit? Here are the other packages we offer.
+      </p>
+    </div>
+    <div className="mx-auto mt-8 grid max-w-4xl items-stretch gap-5 md:grid-cols-2">
+      {planDetails
+        .filter((_, i) => i !== tier)
+        .map((p) => (
+          <PlanCard key={p.name} plan={p} />
+        ))}
+    </div>
+    </>
   );
 }
