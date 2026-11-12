@@ -11,7 +11,7 @@ const emptySubscribe = () => () => {};
 const INTRO_SEEN_KEY = "cerity-intro-seen";
 const INTRO_MS = 1900;
 const NAV_INTRO_MS = 850;
-const MORPH_MS = 1050;
+const MORPH_MS = 750;
 
 type Phase = "intro" | "morph" | "done";
 
@@ -57,7 +57,6 @@ export function LogoPageTransition({
     setVisible(false);
     setPhase("done");
     onTransitioning(false);
-    onLanded();
     document.body.style.overflow = "";
   };
 
@@ -135,7 +134,7 @@ export function LogoPageTransition({
       });
     }, introMs);
 
-    schedule(finish, introMs + MORPH_MS + 120);
+    schedule(finish, introMs + MORPH_MS);
   };
 
   useEffect(() => {
@@ -199,7 +198,7 @@ export function LogoPageTransition({
           transform: flyTransform,
           transition:
             phase === "morph"
-              ? `transform ${MORPH_MS}ms cubic-bezier(0.34, 1.25, 0.64, 1)`
+              ? `transform ${MORPH_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`
               : "none",
         }}
       >
