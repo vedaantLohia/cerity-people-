@@ -232,6 +232,7 @@ export default function SolutionsPage() {
 ========================================================= */}
 <section
   id="pricing"
+  hidden
   className="relative overflow-hidden px-5 py-16 sm:px-8 md:py-20 lg:px-12 lg:py-28"
 >
   <div className="pointer-events-none absolute inset-0 overflow-hidden">
