@@ -36,12 +36,7 @@ const footerColumns = [
       { label: "Digital Transformation", href: "/consulting" },
     ],
   },
-  {
-    title: "Resources",
-    links: [
-      { label: "Guides", href: "/insights" },
-    ],
-  },
+  // Resources column hidden for now (only linked to /insights).
 ];
 
 const social = [
@@ -101,7 +96,7 @@ export function Footer() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8">
             {footerColumns.map((col) => (
               <div key={col.title}>
                 <h3 className={cn("text-sm font-semibold", isContact ? "text-white" : "text-navy")}>
