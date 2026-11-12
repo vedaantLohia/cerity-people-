@@ -12,18 +12,7 @@ const footerColumns = [
     title: "Company",
     links: [
       { label: "About Us", href: "/about" },
-      { label: "Careers", href: "/contact" },
       { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "HR Technology",
-    links: [
-      { label: "HRMS", href: "/hr-tech" },
-      { label: "Recruitment", href: "/hr-tech" },
-      { label: "Payroll", href: "/hr-tech" },
-      { label: "Attendance", href: "/hr-tech" },
-      { label: "Leave Management", href: "/hr-tech" },
     ],
   },
   {
@@ -34,6 +23,16 @@ const footerColumns = [
       { label: "Compliance", href: "/consulting" },
       { label: "HR Strategy", href: "/consulting" },
       { label: "Digital Transformation", href: "/consulting" },
+    ],
+  },
+  {
+    title: "HR Technology",
+    links: [
+      { label: "HRMS", href: "/hr-tech" },
+      { label: "Recruitment", href: "/hr-tech" },
+      { label: "Payroll", href: "/hr-tech" },
+      { label: "Attendance", href: "/hr-tech" },
+      { label: "Leave Management", href: "/hr-tech" },
     ],
   },
   // Resources column hidden for now (only linked to /insights).

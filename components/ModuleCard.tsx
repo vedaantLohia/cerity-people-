@@ -13,11 +13,11 @@ export function ModuleCard({
   return (
     <article
       className={cn(
-        "flex gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-lg",
+        "flex gap-4 rounded-2xl border border-[#bfd6ff] bg-[#e6f0ff] p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8fb5ff] hover:bg-[#dce9ff] hover:shadow-lg",
         className,
       )}
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-navy">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#cfe0ff] text-navy">
         <Layers className="h-5 w-5" aria-hidden />
       </div>
       <div>

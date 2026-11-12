@@ -4,6 +4,7 @@ import { CTASection } from "@/components/CTASection";
 import { HeroSection } from "@/components/HeroSection";
 import { HomePageClass } from "@/components/HomePageClass";
 import { JsonLd } from "@/components/JsonLd";
+import { PackageBuilder } from "@/components/PackageBuilder";
 import { PlanComparisonTable } from "@/components/PlanComparisonTable";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import Link from "next/link";
@@ -232,7 +233,6 @@ export default function SolutionsPage() {
 ========================================================= */}
 <section
   id="pricing"
-  hidden
   className="relative overflow-hidden px-5 py-16 sm:px-8 md:py-20 lg:px-12 lg:py-28"
 >
   <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -286,6 +286,10 @@ export default function SolutionsPage() {
 
       </div>
 
+
+      <PackageBuilder />
+
+      <div className="mt-20" />
 
       {/* =====================================================
           PLAN GRID
